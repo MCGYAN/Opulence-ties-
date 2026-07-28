@@ -92,7 +92,7 @@ export default function POSPage() {
 
                 // Extract Categories
                 const cats = Array.from(new Set(formatted.map(p => p.category))).sort();
-                setCategories(['All', ...cats]);
+                setCategories(['All'...cats]);
             }
 
             // Fetch Customers from customers table (not profiles)
@@ -331,7 +331,7 @@ export default function POSPage() {
                 }
             }
 
-            // 4. If Cash or Card — mark as paid, reduce stock
+            // 4. If Cash or Card, mark as paid, reduce stock
             if (isCashOrCard) {
                 // Call mark_order_paid to reduce stock (uses order_number as order_ref)
                 try {
@@ -343,7 +343,7 @@ export default function POSPage() {
                     console.error('Stock reduction error (non-fatal):', stockErr);
                 }
 
-                // Success — show completed
+                // Success, show completed
                 setCompletedOrder({ id: order.id, orderNumber, total: grandTotal, items: cart });
                 setCart([]);
 
@@ -353,8 +353,7 @@ export default function POSPage() {
                     fetch('/api/notifications', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
-                            ...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
+                            'Content-Type': 'application/json'...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
                         },
                         body: JSON.stringify({
                             type: 'order_created',
@@ -369,7 +368,7 @@ export default function POSPage() {
                 }
             }
 
-            // 5. If Momo — initiate Moolre payment
+            // 5. If Momo, initiate Moolre payment
             if (paymentMethod === 'momo') {
                 const paymentRes = await fetch('/api/payment/moolre', {
                     method: 'POST',
@@ -729,7 +728,7 @@ export default function POSPage() {
                                             <option value="">Walk-in Customer / New Guest</option>
                                             {filteredCustomers.map(c => (
                                                 <option key={c.id} value={c.id}>
-                                                    {c.full_name || 'No Name'} — {c.phone || c.email}
+                                                    {c.full_name || 'No Name'}, {c.phone || c.email}
                                                 </option>
                                             ))}
                                         </select>

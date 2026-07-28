@@ -10,7 +10,7 @@ interface CacheEntry<T> {
 
 const cache = new Map<string, CacheEntry<any>>();
 
-const DEFAULT_TTL = 10 * 60 * 1000; // 10 minutes — reduce re-fetches during browsing
+const DEFAULT_TTL = 10 * 60 * 1000; // 10 minutes, reduce re-fetches during browsing
 
 /**
  * Get data from cache or fetch it fresh

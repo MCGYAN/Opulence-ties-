@@ -81,7 +81,7 @@ export async function POST(req: Request) {
                 return NextResponse.json({ success: false, message: 'Invalid callback signature' }, { status: 403 });
             }
         } else {
-            // Log a warning if no secret is configured — this should be fixed
+            // Log a warning if no secret is configured, this should be fixed
             console.warn('[Callback] WARNING: MOOLRE_CALLBACK_SECRET not configured. Callback origin cannot be verified.');
         }
 
@@ -164,13 +164,13 @@ export async function POST(req: Request) {
             }
 
             // ============================================================
-            // SECURITY: Verify amount matches — REJECT if mismatch
+            // SECURITY: Verify amount matches, REJECT if mismatch
             // ============================================================
             const callbackAmount = data.amount ? parseFloat(data.amount) : (body.amount ? parseFloat(body.amount) : null);
             if (callbackAmount !== null) {
                 const expectedAmount = Number(existingOrder.total);
                 if (Math.abs(callbackAmount - expectedAmount) > 0.01) {
-                    console.error('[Callback] AMOUNT MISMATCH — REJECTING! Expected:', expectedAmount, 'Got:', callbackAmount, 'Order:', merchantOrderRef);
+                    console.error('[Callback] AMOUNT MISMATCH, REJECTING! Expected:', expectedAmount, 'Got:', callbackAmount, 'Order:', merchantOrderRef);
                     return NextResponse.json({
                         success: false,
                         message: 'Payment amount does not match order total'

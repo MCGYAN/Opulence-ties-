@@ -6,7 +6,7 @@ export const alt = `${SITE_NAME} - ${SITE_HERO_TAGLINE}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-/** Dynamic OG image — customize colors/text in lib/site-brand.ts */
+/** Dynamic OG image, customize colors/text in lib/site-brand.ts */
 export default function OpenGraphImage() {
   return new ImageResponse(
     (

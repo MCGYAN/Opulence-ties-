@@ -101,12 +101,12 @@ export default function Header() {
         <nav aria-label="Main navigation" className="relative">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Mobile: logo left | search + cart right */}
-            <div className="lg:hidden flex items-center justify-between h-16 gap-3">
+            <div className="lg:hidden flex items-center justify-between h-[4.5rem] gap-3">
               <Link href="/" className="flex shrink-0 select-none" aria-label="Go to homepage">
                 <img
                   src={HEADER_LOGO_PATH}
                   alt={siteName}
-                  className="h-9 w-auto max-w-[min(52vw,200px)] object-contain object-left"
+                  className="h-16 w-auto max-w-[min(62vw,260px)] object-contain object-left"
                 />
               </Link>
               <div className="flex items-center justify-end gap-1 shrink-0">
@@ -130,7 +130,7 @@ export default function Header() {
             {/* Desktop */}
             <div
               className={`hidden lg:grid lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-4 lg:transition-all lg:duration-500 ${
-                scrolled ? 'lg:h-[4.25rem]' : 'lg:h-20'
+                scrolled ? 'lg:h-[4.75rem]' : 'lg:h-24'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -139,7 +139,7 @@ export default function Header() {
                     src={HEADER_LOGO_PATH}
                     alt={siteName}
                     className={`w-auto object-contain transition-all duration-500 ${
-                      scrolled ? 'h-8 sm:h-9' : 'h-9 sm:h-10 md:h-11 max-w-[220px]'
+                      scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[4.5rem] max-w-[300px]'
                     }`}
                   />
                 </Link>

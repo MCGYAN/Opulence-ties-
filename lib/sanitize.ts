@@ -17,7 +17,7 @@ export function escapeHtml(str: string): string {
 }
 
 /**
- * Sanitize HTML content — allow safe tags for blog/article rendering
+ * Sanitize HTML content, allow safe tags for blog/article rendering
  * while stripping dangerous elements (script, iframe, event handlers, etc.)
  */
 export function sanitizeHtml(html: string): string {

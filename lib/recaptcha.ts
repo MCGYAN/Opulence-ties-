@@ -49,7 +49,7 @@ export async function verifyRecaptcha(
     expectedAction?: string
 ): Promise<{ success: boolean; score?: number; error?: string }> {
     if (!RECAPTCHA_SECRET_KEY) {
-        console.warn('[reCAPTCHA] RECAPTCHA_SECRET_KEY not configured — skipping verification');
+        console.warn('[reCAPTCHA] RECAPTCHA_SECRET_KEY not configured, skipping verification');
         return { success: true, score: 1.0 }; // Pass through if not configured
     }
 

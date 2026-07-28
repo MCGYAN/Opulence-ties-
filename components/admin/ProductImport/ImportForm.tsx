@@ -243,7 +243,7 @@ export default function ImportForm() {
                 <input
                   ref={imagesInputRef}
                   type="file"
-                  accept=".jpg,.jpeg,.png,.webp,.gif"
+                  accept=".jpg.jpeg.png.webp.gif"
                   multiple
                   className="sr-only"
                   id="images-upload"

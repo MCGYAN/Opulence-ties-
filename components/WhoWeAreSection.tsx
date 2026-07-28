@@ -21,7 +21,7 @@ export default function WhoWeAreSection() {
                 <strong>{SITE_NAME}</strong> is your store. Update this copy in <code>components/WhoWeAreSection.tsx</code>. Based in {BUSINESS_ADDRESS}.
               </p>
               <p>
-                We focus on quality and value. Whether you're stocking up for your business or shopping for yourself, we handpick our perfumes to deliver genuine products and great prices.
+                We focus on quality and value. Whether you're stocking up for your business or shopping for yourself, we handpick products that deliver genuine quality and great prices.
               </p>
               <div className="pt-4">
                 <Link 

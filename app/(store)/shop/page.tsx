@@ -230,7 +230,7 @@ function ShopContent() {
       <PageHero
         eyebrow={`${SITE_NAME} Collection`}
         title="The Edit"
-        subtitle="Curated women's fashion — discover pieces that turn heads and feel like you."
+        subtitle="Browse human-hair wigs, closures, frontals and services, your next crown is waiting."
       />
 
       <div className="lg:hidden glass-cream border-b border-brand-rose/15 py-3 px-4 sticky top-16 z-30">
@@ -331,7 +331,7 @@ function ShopContent() {
                     <div className="boutique-divider" />
 
                     <div>
-                      <h3 className="boutique-section-eyebrow mb-4">Max price · GH₵{priceRange[1]}</h3>
+                      <h3 className="boutique-section-eyebrow mb-4">Max price GH₵{priceRange[1]}</h3>
                       <input
                         type="range"
                         min="0"

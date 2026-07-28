@@ -108,7 +108,7 @@ export default async function CategoriesPage() {
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-serif text-3xl md:text-4xl text-brand-cream mb-4">Need styling help?</h2>
           <p className="text-brand-cream/70 mb-8 leading-relaxed max-w-xl mx-auto">
-            Browse the full edit or reach out — we&apos;ll help you find your next favourite piece.
+            Browse the full edit or reach out, we&apos;ll help you find your next favourite piece.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/shop" className="boutique-btn-primary !bg-brand-cream !text-brand-plum hover:!bg-white">

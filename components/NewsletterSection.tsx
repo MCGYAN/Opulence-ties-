@@ -25,9 +25,9 @@ export default function NewsletterSection() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <h3 className="font-serif text-3xl md:text-4xl text-brand-plum mb-4">Stay Ahead Of The Trends</h3>
+      <h3 className="font-serif text-3xl md:text-4xl text-brand-plum mb-4">Never Miss a New Drop</h3>
       <p className="text-brand-plum/70 mb-8 max-w-lg mx-auto">
-        Get first access to new arrivals, exclusive offers, and style updates.
+        Be first to know when fresh wigs and units land, plus exclusive offers for our community.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
@@ -39,7 +39,7 @@ export default function NewsletterSection() {
           className="flex-1 boutique-input !py-3.5 text-center sm:text-left"
         />
         <button type="submit" disabled={isSubmitting} className="boutique-btn-primary disabled:opacity-70">
-          {isSubmitting ? 'Joining…' : 'Join The Community'}
+          {isSubmitting ? 'Joining…' : 'Join the Crown List'}
         </button>
       </form>
       {submitStatus === 'success' && (

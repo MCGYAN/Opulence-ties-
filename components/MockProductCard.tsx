@@ -51,17 +51,17 @@ export default function MockProductCard({
         )}
 
         {onSale && (
-          <span className="absolute top-2.5 left-2.5 z-[2] px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.14em] bg-brand-plum/85 backdrop-blur-md text-brand-cream border border-white/15">
+          <span className="absolute top-2.5 left-2.5 z-[2] px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.14em] bg-brand-rose/90 backdrop-blur-md text-white border border-white/20">
             Sale
           </span>
         )}
 
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-brand-plum/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-active:opacity-100 group-hover:opacity-100 pointer-events-none" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-brand-rose/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-active:opacity-100 group-hover:opacity-100 pointer-events-none" />
 
         {/* Mobile + desktop tap/hover cue */}
         <div className="absolute bottom-3 left-3 right-3 z-[2] opacity-0 translate-y-2 group-active:opacity-100 group-active:translate-y-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-boutique">
-          <span className="block w-full text-center py-2 rounded-full boutique-category-name-glass boutique-category-name-glass--overlay text-brand-cream text-[10px] font-semibold uppercase tracking-[0.18em]">
-            View piece
+          <span className="block w-full text-center py-2 rounded-full boutique-category-name-glass boutique-category-name-glass--overlay text-brand-plum text-[10px] font-semibold uppercase tracking-[0.18em]">
+            Shop now
           </span>
         </div>
       </Link>

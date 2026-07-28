@@ -1,6 +1,14 @@
 "use client";
 
-import { SITE_NAME, SITE_TAGLINE, LOGO_PATH, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS, SOCIAL_INSTAGRAM, SOCIAL_TIKTOK, CATALOG_PDF_PREFIX, OG_IMAGE_PATH, HERO_IMAGE_PATH, DEFAULT_PRODUCT_BRAND } from '@/lib/site-brand';
+import {
+  SITE_NAME,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_SECONDARY_DISPLAY,
+  BUSINESS_ADDRESS,
+  WHATSAPP_URL,
+} from '@/lib/site-brand';
 import { useState, useEffect } from 'react';
 import { useCMS } from '@/context/CMSContext';
 import { supabase } from '@/lib/supabase';
@@ -89,19 +97,17 @@ export default function ContactPage() {
   };
 
   // Get contact details from CMS settings
-  const contactEmail = getSetting('contact_email') || 'CONTACT_EMAIL';
-  const contactPhone = getSetting('contact_phone') || 'CONTACT_PHONE';
-  const contactWhatsapp = getSetting('contact_whatsapp') || 'CONTACT_PHONE';
-  const contactAddress = getSetting('contact_address') || 'BUSINESS_ADDRESS';
+  const contactEmail = getSetting('contact_email') || CONTACT_EMAIL;
+  const contactPhone = getSetting('contact_phone') || CONTACT_PHONE_DISPLAY;
+  const contactWhatsapp = getSetting('contact_whatsapp') || CONTACT_PHONE_DISPLAY;
+  const contactAddress = getSetting('contact_address') || BUSINESS_ADDRESS;
 
   const heroTitle = pageContent?.title || `Contact ${SITE_NAME}`;
-  const heroSubtitle = pageContent?.subtitle || 'Need help with products or wholesale orders?';
-  const heroContent = pageContent?.content || 'Questions about sizing, orders, or new drops? We\'re here to help.';
+  const heroSubtitle = pageContent?.subtitle || 'Order wigs, book fixing or ask about custom units, we reply fast on WhatsApp.';
+  const heroContent = pageContent?.content || 'Call, WhatsApp or send a message. We are here to help you find your perfect crown.';
 
-  const waNumber = contactWhatsapp.replace(/[^0-9]/g, '');
-  const waLink = waNumber.startsWith('0') ? `https://wa.me/233${waNumber.slice(1)}` : `https://wa.me/${waNumber}`;
-  const telNumber = contactPhone.replace(/\s/g, '');
-  const telLink = telNumber.startsWith('0') ? `tel:+233${telNumber.slice(1)}` : `tel:${telNumber}`;
+  const waLink = WHATSAPP_URL;
+  const telLink = `tel:${CONTACT_PHONE}`;
 
   const contactMethods = [
     {
@@ -109,7 +115,7 @@ export default function ContactPage() {
       title: 'Call Us',
       value: contactPhone,
       link: telLink,
-      description: 'Mon-Sat, 9am-6pm'
+      description: `Also: ${CONTACT_PHONE_SECONDARY_DISPLAY}`,
     },
     {
       icon: 'ri-mail-line',
@@ -130,23 +136,27 @@ export default function ContactPage() {
       title: 'Visit Us',
       value: contactAddress,
       link: 'https://maps.google.com',
-      description: 'BUSINESS_ADDRESS'
+      description: 'Ghana, nationwide delivery'
     }
   ];
 
   const faqs = [
     {
-      question: 'What are your delivery times?',
-      answer: 'Standard delivery takes 2-5 business days across Ghana. We pack every order with care so your outfits arrive in great condition.'
+      question: 'How do I place an order?',
+      answer: `Call ${CONTACT_PHONE_DISPLAY}, WhatsApp us, or add items to your cart and checkout. For custom wigs and services, message us first so we can confirm details.`,
     },
     {
-      question: 'Do you offer international shipping?',
-      answer: 'We currently serve customers within Ghana from our Spintex Lashibi location.'
+      question: 'What are your delivery times?',
+      answer: 'Standard delivery takes 2-5 business days across Ghana. Every wig is packed with care so your unit arrives in perfect condition.',
+    },
+    {
+      question: 'Do you offer wig fixing and revamps?',
+      answer: 'Yes, we offer professional wig fixing, machine wig-making and revamp services. Book via WhatsApp to confirm availability and pricing.',
     },
     {
       question: 'What payment methods do you accept?',
-      answer: 'We accept MOMO, Instant Bank Transfer, Cash (in store only), and Visa Card. Please note we do not accept payment on delivery.'
-    }
+      answer: 'We accept Mobile Money, bank transfer and card payments online. For custom orders, we may request a deposit, details shared on WhatsApp.',
+    },
   ];
 
   return (
@@ -154,7 +164,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title={`Contact ${SITE_NAME}`}
-        subtitle="For personal orders, wholesale enquiries, or product guidance, our team is ready to help you choose the right scent."
+        subtitle="Order wigs, book fixing or ask about custom units, we reply fast on WhatsApp."
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

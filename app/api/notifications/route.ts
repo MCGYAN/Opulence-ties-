@@ -48,7 +48,7 @@ export async function POST(request: Request) {
         }
 
         // ============================================================
-        // order_created — verify the order exists in the database
+        // order_created, verify the order exists in the database
         // ============================================================
         if (type === 'order_created') {
             // Verify the order actually exists before sending confirmation
@@ -126,7 +126,7 @@ export async function POST(request: Request) {
         }
 
         // ============================================================
-        // contact — public but strictly validated and rate-limited
+        // contact, public but strictly validated and rate-limited
         // ============================================================
         if (type === 'contact') {
             const { name, email, subject, message } = payload;
@@ -154,7 +154,7 @@ export async function POST(request: Request) {
         }
 
         // ============================================================
-        // campaign — admin only, with HTML sanitization
+        // campaign, admin only, with HTML sanitization
         // ============================================================
         if (type === 'campaign') {
             const { recipients, subject, message, channels } = payload;

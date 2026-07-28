@@ -48,7 +48,7 @@ export function generateMetadata({
     Boolean
   ) as string[];
 
-  const allKeywords = [...new Set([...keywords, ...defaultKeywords])];
+  const allKeywords = [...new Set([...keywords...defaultKeywords])];
 
   const metadata: Metadata = {
     title: fullTitle,
@@ -78,9 +78,7 @@ export function generateMetadata({
   if (ogType === 'product' && price != null) {
     metadata.other = {
       'product:price:amount': String(price),
-      'product:price:currency': currency,
-      ...(availability ? { 'product:availability': availability } : {}),
-      ...(category ? { 'product:category': category } : {}),
+      'product:price:currency': currency...(availability ? { 'product:availability': availability } : {})...(category ? { 'product:category': category } : {}),
     };
   }
 

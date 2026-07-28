@@ -152,7 +152,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           setQuantity(transformedProduct.moq);
         }
 
-        // If variants exist, do NOT pre-select — force user to choose
+        // If variants exist, do NOT pre-select, force user to choose
         // Reset variant and color selection
         setSelectedVariant(null);
         setSelectedSize('');
@@ -465,12 +465,12 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                   const showNameSelector = visibleVariants.length > 1 || (!hasColors && visibleVariants.length > 0);
 
                   if (!showNameSelector && !hasColors) {
-                    // Single variant with no colors — show standard picker
+                    // Single variant with no colors, show standard picker
                     return (
                       <div className="mb-8">
                         <label className="block font-semibold text-brand-black mb-3">
                           Variant: {selectedVariant ? (
-                            <span className="text-brand-gold font-normal">{selectedVariant.name} — GH₵{selectedVariant.price?.toFixed(2)}</span>
+                            <span className="text-brand-gold font-normal">{selectedVariant.name}, GH₵{selectedVariant.price?.toFixed(2)}</span>
                           ) : (
                             <span className="text-red-500 font-normal text-sm">Please select a variant</span>
                           )}
@@ -512,7 +512,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                       <div className="mb-8">
                         <label className="block font-semibold text-brand-black mb-3">
                           Size / Type: {selectedVariant ? (
-                            <span className="text-brand-gold font-normal">{selectedVariant.name} — GH₵{selectedVariant.price?.toFixed(2)}</span>
+                            <span className="text-brand-gold font-normal">{selectedVariant.name}, GH₵{selectedVariant.price?.toFixed(2)}</span>
                           ) : (
                             <span className="text-red-500 font-normal text-sm">Please select</span>
                           )}

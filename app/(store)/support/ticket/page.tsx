@@ -290,7 +290,7 @@ export default function SupportTicketPage() {
                     type="file"
                     onChange={handleFileChange}
                     multiple
-                    accept="image/*,.pdf"
+                    accept="image/*.pdf"
                     className="hidden"
                     id="file-upload"
                   />

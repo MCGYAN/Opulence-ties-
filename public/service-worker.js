@@ -1,6 +1,6 @@
 // Service Worker — update CACHE_VERSION when deploying
-const CACHE_VERSION = 'app-v3-house-of-k';
-const LOGO_PATH = '/logo.png?v=2';
+const CACHE_VERSION = 'app-v4-hair-reigns-gh';
+const LOGO_PATH = '/logo-header.png?v=4';
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
 const IMAGE_CACHE = `images-${CACHE_VERSION}`;

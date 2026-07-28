@@ -112,10 +112,10 @@ export default function ProductSalesStats({ isOpen, onClose }: { isOpen: boolean
 
                 // Convert to array and sort by items sold
                 const result = Array.from(map.values())
-                    .map(({ _orderIds, variants, ...rest }) => ({
+                    .map(({ _orderIds, variants...rest }) => ({
                         ...rest,
                         variants: Array.from(variants.entries())
-                            .map(([name, data]) => ({ name, ...data }))
+                            .map(([name, data]) => ({ name...data }))
                             .sort((a, b) => b.quantity - a.quantity)
                     }))
                     .sort((a, b) => b.itemsSold - a.itemsSold);
@@ -242,7 +242,7 @@ export default function ProductSalesStats({ isOpen, onClose }: { isOpen: boolean
                                                         <span className="font-medium">{v.name}</span>
                                                     </span>
                                                 </td>
-                                                <td className="p-3 text-center text-xs text-gray-400">—</td>
+                                                <td className="p-3 text-center text-xs text-gray-400">, </td>
                                                 <td className="p-3 text-center text-xs font-semibold text-gray-700">{v.quantity}</td>
                                                 <td className="p-3 text-right pr-6 text-xs text-gray-500 font-mono">
                                                     {v.revenue > 0 ? v.revenue.toLocaleString() : '-'}
@@ -261,7 +261,7 @@ export default function ProductSalesStats({ isOpen, onClose }: { isOpen: boolean
                 </div>
 
                 <div className="p-4 border-t border-gray-100 bg-gray-50 text-xs text-gray-500 flex justify-between">
-                    <span>* Only paid/confirmed orders · Click a row to see variant breakdown</span>
+                    <span>* Only paid/confirmed orders. Click a row to see variant breakdown</span>
                     <span>Showing top {stats.length} products</span>
                 </div>
             </div>

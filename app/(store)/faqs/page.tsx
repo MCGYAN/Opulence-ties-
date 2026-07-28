@@ -1,6 +1,6 @@
 "use client";
 
-import { SITE_NAME, SITE_TAGLINE, LOGO_PATH, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS, SOCIAL_INSTAGRAM, SOCIAL_TIKTOK, CATALOG_PDF_PREFIX, OG_IMAGE_PATH, HERO_IMAGE_PATH, DEFAULT_PRODUCT_BRAND } from '@/lib/site-brand';
+import { SITE_NAME, SITE_TAGLINE, LOGO_PATH, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS, BUSINESS_COUNTRY, SOCIAL_INSTAGRAM, SOCIAL_TIKTOK, CATALOG_PDF_PREFIX, OG_IMAGE_PATH, HERO_IMAGE_PATH, DEFAULT_PRODUCT_BRAND } from '@/lib/site-brand';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -46,12 +46,12 @@ export default function FAQsPage() {
     {
       category: 'shipping',
       question: 'How much does shipping cost?',
-      answer: 'Standard shipping costs GHS 20. Express delivery costs GHS 40. Orders over GHS 300 qualify for FREE standard shipping. Store pickup is also available from our Spintex Lashibi, Shalom Spot Junction location.'
+      answer: `Standard shipping costs GHS 20. Express delivery costs GHS 40. Orders over GHS 300 qualify for FREE standard shipping. Store pickup is also available from ${BUSINESS_ADDRESS}.`
     },
     {
       category: 'shipping',
       question: 'Do you ship outside Ghana?',
-      answer: 'We currently serve customers within Ghana from our Spintex Lashibi location. We\'re working on expanding to neighbouring West African countries. Sign up for our newsletter to be notified when international shipping becomes available.'
+      answer: `We currently serve customers within ${BUSINESS_COUNTRY} from ${BUSINESS_ADDRESS}. Sign up for our newsletter to be notified when we expand shipping coverage.`
     },
     {
       category: 'shipping',
@@ -96,7 +96,7 @@ export default function FAQsPage() {
     {
       category: 'payment',
       question: 'When will my payment be charged?',
-      answer: 'For card and mobile money payments, you\'re charged immediately. We do not accept payment on delivery — payment must be completed before dispatch. If an item is out of stock, we\'ll refund you within 24 hours.'
+      answer: 'For card and mobile money payments, you\'re charged immediately. We do not accept payment on delivery, payment must be completed before dispatch. If an item is out of stock, we\'ll refund you within 24 hours.'
     },
     {
       category: 'payment',

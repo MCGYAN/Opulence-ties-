@@ -36,7 +36,7 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
     if (!document.getElementById(styleId)) {
       const style = document.createElement('style');
       style.id = styleId;
-      style.textContent = '@media print { body * { visibility: hidden; } .print-section, .print-section * { visibility: visible; } .print-section { position: absolute; left: 0; top: 0; width: 100%; padding: 20px; } .no-print { display: none !important; } }';
+      style.textContent = '@media print { body * { visibility: hidden; } .print-section.print-section * { visibility: visible; } .print-section { position: absolute; left: 0; top: 0; width: 100%; padding: 20px; } .no-print { display: none !important; } }';
       document.head.appendChild(style);
     }
     return () => {
@@ -161,8 +161,7 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
         fetch('/api/notifications', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+            'Content-Type': 'application/json'...(authToken && { 'Authorization': `Bearer ${authToken}` })
           },
           body: JSON.stringify({
             type: 'order_status',
@@ -209,8 +208,7 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
       const response = await fetch('/api/notifications', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+          'Content-Type': 'application/json'...(authToken && { 'Authorization': `Bearer ${authToken}` })
         },
         body: JSON.stringify({
           type: 'order_status',
@@ -347,7 +345,7 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
           {/* Footer */}
           <div className="border-t-2 border-gray-800 pt-4 text-center text-sm text-gray-600">
             <p>Thank you for shopping with {SITE_NAME}!</p>
-            <p>Questions? Call CONTACT_PHONE or WhatsApp CONTACT_PHONE · CONTACT_EMAIL</p>
+            <p>Questions? Call CONTACT_PHONE or WhatsApp CONTACT_PHONE, CONTACT_EMAIL</p>
           </div>
         </div>
       </div>

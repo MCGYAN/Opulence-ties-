@@ -7,13 +7,17 @@ import {
 } from '@/lib/site-brand';
 import type { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://yourdomain.com';
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://hairreignsgh.com';
 
 export const SEO_KEYWORDS = [
-  "women's fashion Ghana",
-  'trendy outfits Kasoa',
-  'affordable fashion Ghana',
-  'House of K',
+  'human hair wigs Ghana',
+  'lace front wigs Ghana',
+  'closure units Ghana',
+  'frontal units Ghana',
+  'custom wigs Ghana',
+  'wig fixing Ghana',
+  'wig revamp Ghana',
+  'Hair Reigns GH',
   BUSINESS_CITY,
   BUSINESS_COUNTRY,
 ].filter(Boolean);
@@ -62,32 +66,32 @@ export function buildPageMetadata({
 export const pageSeoTemplates = {
   home: () =>
     buildPageMetadata({
-      title: `${SITE_NAME} | Trendy Women's Fashion in Kasoa`,
+      title: `${SITE_NAME} | Premium Wigs & Hair Services in Ghana`,
       description: SITE_DESCRIPTION,
       path: '/',
     }),
   shop: () =>
     buildPageMetadata({
-      title: `Shop | ${SITE_NAME}`,
-      description: `Browse trendy women's fashion at ${SITE_NAME}. New arrivals and best sellers.`,
+      title: `Shop Wigs & Hair | ${SITE_NAME}`,
+      description: `Browse human-hair wigs, closures, frontals and services at ${SITE_NAME}. Order via WhatsApp.`,
       path: '/shop',
     }),
   categories: () =>
     buildPageMetadata({
       title: `Categories | ${SITE_NAME}`,
-      description: `Shop dresses, sets, tops, jeans & more at ${SITE_NAME}.`,
+      description: `Shop ready-made wigs, closure units, frontal units and custom services at ${SITE_NAME}.`,
       path: '/categories',
     }),
   about: () =>
     buildPageMetadata({
       title: `About | ${SITE_NAME}`,
-      description: `Meet ${SITE_NAME} — trendy women's fashion based in Ofaakor, Kasoa, Ghana.`,
+      description: `Meet ${SITE_NAME}, Ghana's destination for premium wigs, closures, frontals and expert hair services.`,
       path: '/about',
     }),
   contact: () =>
     buildPageMetadata({
       title: `Contact | ${SITE_NAME}`,
-      description: `Get in touch with ${SITE_NAME} in Kasoa, Ghana.`,
+      description: `Call or WhatsApp ${SITE_NAME} to order wigs, book fixing or ask about custom units.`,
       path: '/contact',
     }),
 };

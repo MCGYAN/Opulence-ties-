@@ -52,7 +52,7 @@ function addPageFooter(doc: jsPDF, pageNum: number, totalPages: number) {
   doc.setFontSize(8);
   doc.setTextColor(120);
   doc.text(
-    `House of EL — Product catalog — Page ${pageNum} of ${totalPages}`,
+    `${SITE_NAME}, Product catalog, Page ${pageNum} of ${totalPages}`,
     pageWidth / 2,
     pageHeight - 8,
     { align: 'center' }
@@ -85,7 +85,7 @@ export async function generateProductCatalogPdf(
   // Header
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(20);
-  doc.text(options.title ?? 'House of EL', margin, y);
+  doc.text(options.title ?? SITE_NAME, margin, y);
   y += 9;
 
   doc.setFont('helvetica', 'normal');

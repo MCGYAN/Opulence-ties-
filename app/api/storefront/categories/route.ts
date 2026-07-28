@@ -3,7 +3,7 @@ import { getSupabaseServerClient } from '@/lib/supabase';
 
 // Simple in-memory cache
 let cache: { data: unknown; timestamp: number } | null = null;
-const CACHE_TTL = 30 * 60 * 1000; // 30 minutes — categories rarely change
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes, categories rarely change
 
 export async function GET() {
     const supabase = getSupabaseServerClient();

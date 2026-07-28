@@ -32,7 +32,7 @@ function OrderTrackingContent() {
     setError('');
 
     try {
-      // Only select the fields we need — avoid exposing unnecessary data
+      // Only select the fields we need, avoid exposing unnecessary data
       const { data, error: fetchError } = await supabase
         .from('orders')
         .select(`
@@ -66,7 +66,7 @@ function OrderTrackingContent() {
         return;
       }
 
-      // SECURITY: Always verify email matches — this is mandatory
+      // SECURITY: Always verify email matches, this is mandatory
       if (data.email?.toLowerCase() !== emailToVerify.toLowerCase()) {
         setError('The email address does not match this order. Please use the email you placed the order with.');
         setIsTracking(false);

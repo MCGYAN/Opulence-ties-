@@ -81,5 +81,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error generating sitemap:', error);
   }
 
-  return [...staticPages, ...productPages, ...categoryPages];
+  return [...staticPages...productPages...categoryPages];
 }

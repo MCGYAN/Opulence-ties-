@@ -426,7 +426,7 @@ export default function ProductEditor({ productId }: { productId: string }) {
                 </label>
                 <input
                   type="text"
-                  defaultValue="SITE_NAME, perfumes wholesale and retail, BUSINESS_ADDRESS"
+                  defaultValue="SITE_NAME, online store, BUSINESS_ADDRESS"
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
                 <p className="text-sm text-gray-500 mt-2">Separate keywords with commas</p>

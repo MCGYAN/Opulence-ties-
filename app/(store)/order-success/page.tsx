@@ -68,7 +68,7 @@ function OrderSuccessContent() {
     }
 
     // Callback hasn't fired - verify via our endpoint
-    // Verify payment via Moolre API — we no longer trust the redirect alone
+    // Verify payment via Moolre API, we no longer trust the redirect alone
     try {
       const res = await fetch('/api/payment/moolre/verify', {
         method: 'POST',

@@ -61,7 +61,7 @@ export default function MiniCart({ isOpen, onClose }: MiniCartProps) {
               Explore the collection and find something that makes you feel confident.
             </p>
             <Link href="/shop" onClick={onClose} className="boutique-btn-primary">
-              Browse the boutique
+              Browse the shop
             </Link>
           </div>
         ) : (

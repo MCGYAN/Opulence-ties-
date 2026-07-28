@@ -68,7 +68,7 @@ export async function POST(req: Request) {
             }, { status: 400 });
         }
 
-        // 3. ONLY verify with Moolre's API — no more trusting client-side flags
+        // 3. ONLY verify with Moolre's API, no more trusting client-side flags
         let moolreApiVerified = false;
 
         if (!process.env.MOOLRE_API_USER || !process.env.MOOLRE_API_PUBKEY) {

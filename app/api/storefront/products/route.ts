@@ -3,7 +3,7 @@ import { getSupabaseServerClient } from '@/lib/supabase';
 
 // Simple in-memory cache
 let cache: { data: Record<string, unknown>; timestamp: number } | null = null;
-const CACHE_TTL = 15 * 60 * 1000; // 15 minutes — products don't change frequently
+const CACHE_TTL = 15 * 60 * 1000; // 15 minutes, products don't change frequently
 
 export async function GET(request: Request) {
     const supabase = getSupabaseServerClient();
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     // Build a cache key from params
     const cacheKey = `${featured}-${limit}-${category || 'all'}`;
 
-    // Check cache (only for featured/home requests — general shop is more dynamic)
+    // Check cache (only for featured/home requests, general shop is more dynamic)
     if (featured && cache && cache.data?.[cacheKey] && Date.now() - cache.timestamp < CACHE_TTL) {
         return NextResponse.json(cache.data[cacheKey], {
             headers: {

@@ -3,7 +3,7 @@
  * Matches ProductForm fields: name, price (required); description, category, compare_at_price,
  * quantity, moq, status (Active/Draft/Archived), featured, seo_title, seo_description, keywords→tags,
  * low_stock_threshold, preorder_shipping, images; variant_color, variant_color_hex, variant_size,
- * variant_price, variant_stock. SKU and slug are auto-generated — no SKU column.
+ * variant_price, variant_stock. SKU and slug are auto-generated, no SKU column.
  */
 
 import Papa from 'papaparse';

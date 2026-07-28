@@ -8,7 +8,7 @@ import {
   BUSINESS_CITY,
   BUSINESS_COUNTRY,
   SOCIAL_INSTAGRAM,
-  SOCIAL_TIKTOK,
+  SOCIAL_FACEBOOK,
 } from '@/lib/site-brand';
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
@@ -20,7 +20,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#4A2C3D',
+  themeColor: '#E3187D',
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://example.com';
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: [SITE_NAME, "women's fashion", 'Kasoa', 'Ghana fashion', BUSINESS_CITY].filter(Boolean),
+  keywords: [SITE_NAME, 'wigs Ghana', 'human hair', 'lace front', 'wig fixing', BUSINESS_CITY].filter(Boolean),
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
@@ -111,15 +111,15 @@ export default function RootLayout({
     <html lang="en-GH">
       <head>
         {/* PWA Meta Tags */}
-        <meta name="theme-color" content="#4A2C3D" />
+        <meta name="theme-color" content="#E3187D" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#4A2C3D" />
+        <meta name="msapplication-TileColor" content="#E3187D" />
         <meta name="msapplication-tap-highlight" content="no" />
 
-        {/* FAVICON — add /public/favicon.ico and /public/apple-touch-icon.png */}
+        {/* FAVICON, add /public/favicon.ico and /public/apple-touch-icon.png */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
@@ -157,7 +157,7 @@ export default function RootLayout({
                   "logo": `${siteUrl}${LOGO_PATH}`,
                   "image": `${siteUrl}${LOGO_PATH}`,
                   "description": SITE_DESCRIPTION,
-                  "sameAs": [SOCIAL_INSTAGRAM, SOCIAL_TIKTOK].filter(Boolean),
+                  "sameAs": [SOCIAL_INSTAGRAM, SOCIAL_FACEBOOK].filter(Boolean),
                   "contactPoint": {
                     "@type": "ContactPoint",
                     "contactType": "customer service",

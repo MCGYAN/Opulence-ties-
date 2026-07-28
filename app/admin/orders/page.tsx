@@ -142,7 +142,7 @@ export default function AdminOrdersPage() {
   };
 
   const getCustomerName = (order: Order) => {
-    // Try shipping address names first (most reliable — entered at checkout)
+    // Try shipping address names first (most reliable, entered at checkout)
     if (order.shipping_address?.firstName || order.shipping_address?.lastName) {
       const first = order.shipping_address.firstName?.trim() || '';
       const last = order.shipping_address.lastName?.trim() || '';
@@ -230,8 +230,7 @@ export default function AdminOrdersPage() {
           fetch('/api/notifications', {
             method: 'POST',
             headers: { 
-              'Content-Type': 'application/json',
-              ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+              'Content-Type': 'application/json'...(authToken && { 'Authorization': `Bearer ${authToken}` })
             },
             body: JSON.stringify({
               type: 'order_updated',

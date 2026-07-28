@@ -2,7 +2,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 /**
  * Server-side Supabase client with service role key.
- * ONLY use this in API routes and server actions — NEVER in client components.
+ * ONLY use this in API routes and server actions, NEVER in client components.
  * This bypasses RLS, so always verify the caller is authorized first.
  * Client is created lazily so the app can build when env vars are not set (e.g. CI/Vercel build).
  */
@@ -17,7 +17,7 @@ function getSupabaseAdmin(): SupabaseClient {
         throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL');
     }
     if (!supabaseServiceKey) {
-        console.error('CRITICAL: Missing SUPABASE_SERVICE_ROLE_KEY — admin operations will fail');
+        console.error('CRITICAL: Missing SUPABASE_SERVICE_ROLE_KEY, admin operations will fail');
     }
     _adminClient = createClient(supabaseUrl, supabaseServiceKey || '', {
         auth: {
