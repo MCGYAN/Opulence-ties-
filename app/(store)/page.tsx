@@ -2,6 +2,7 @@
 
 import {
   SITE_NAME,
+  SITE_SHORT_NAME,
   HERO_HEADLINE,
   HERO_SUBHEADLINE,
   HERO_SLIDES,
@@ -30,7 +31,9 @@ export default function Home() {
         <div className="absolute top-1/4 -left-20 w-72 h-72 rounded-full bg-brand-rose/8 blur-3xl animate-float" />
         <div className="absolute bottom-1/4 -right-16 w-96 h-96 rounded-full bg-brand-sage/25 blur-3xl animate-float animate-delay-300" />
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none select-none">
-          <span className="font-serif text-[14vw] text-brand-rose/[0.06] whitespace-nowrap tracking-tight">REIGN</span>
+          <span className="font-serif text-[14vw] text-brand-rose/[0.06] whitespace-nowrap tracking-tight">
+            {SITE_SHORT_NAME}
+          </span>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full">
@@ -48,7 +51,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/shop" className="boutique-btn-primary">
-                  Shop wigs & hair
+                  Shop the glow
                 </Link>
                 <Link href="#shop-by-category" className="boutique-btn-secondary">
                   Browse collections
@@ -106,7 +109,7 @@ export default function Home() {
           <AnimatedSection className="text-center mb-12 md:mb-16">
             <span className="boutique-section-eyebrow">Explore</span>
             <h2 className="boutique-section-title mb-3">Shop By Category</h2>
-            <p className="text-brand-plum/70">Wigs, closures, frontals and services, find your perfect crown.</p>
+            <p className="text-brand-plum/70">Makeup, skincare and essentials — find your softest glow.</p>
           </AnimatedSection>
           <AnimatedGrid className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {MOCK_SHOP_CATEGORIES.map((cat, i) => (
@@ -128,7 +131,7 @@ export default function Home() {
           <AnimatedSection className="text-center mb-12 md:mb-16">
             <span className="boutique-section-eyebrow">Featured</span>
             <h2 className="boutique-section-title mb-3">Featured Products</h2>
-            <p className="text-brand-plum/70">Handpicked wigs, units and services our customers love.</p>
+            <p className="text-brand-plum/70">Favourites that make you feel polished, fresh and ready.</p>
           </AnimatedSection>
           <AnimatedGrid className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
             {MOCK_FEATURED_PRODUCTS.map((product) => (
@@ -146,7 +149,7 @@ export default function Home() {
           </AnimatedGrid>
           <div className="text-center mt-12">
             <Link href="/shop" className="boutique-btn-secondary">
-              View all wigs & hair
+              View all beauty
             </Link>
           </div>
         </div>
@@ -157,7 +160,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-12 md:mb-16">
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-brand-plum mb-3">
-              Queens Who Wear Their Crown
+              Glow Stories From Our Community
             </h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

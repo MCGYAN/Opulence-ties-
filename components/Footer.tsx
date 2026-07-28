@@ -7,7 +7,7 @@ import {
   BUSINESS_ADDRESS,
   SOCIAL_INSTAGRAM,
   SOCIAL_FACEBOOK,
-  FOOTER_LOGO_PATH,
+  LOGO_PATH,
   SHOP_CATEGORIES,
   WHATSAPP_URL,
   CONTACT_PHONE,
@@ -47,7 +47,7 @@ export default function Footer() {
           <div className="flex flex-col items-center text-center">
             <Link href="/" className="inline-block mb-5">
               <img
-                src={FOOTER_LOGO_PATH}
+                src={LOGO_PATH}
                 alt={siteName}
                 className="h-36 w-auto max-w-[300px] object-contain object-center"
               />
@@ -128,7 +128,7 @@ export default function Footer() {
           <div className="space-y-5">
             <Link href="/" className="inline-block">
               <img
-                src={FOOTER_LOGO_PATH}
+                src={LOGO_PATH}
                 alt={siteName}
                 className="h-40 w-auto max-w-[340px] object-contain object-left"
               />

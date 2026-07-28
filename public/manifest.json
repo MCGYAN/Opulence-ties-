@@ -1,13 +1,13 @@
 {
-  "name": "Hair Reigns GH",
-  "short_name": "Hair Reigns",
-  "description": "Wear Your Crown.",
+  "name": "Bibi Beauty Store",
+  "short_name": "Bibi Beauty",
+  "description": "Glow Like You Mean It.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#E3187D",
+  "background_color": "#FFF7FB",
+  "theme_color": "#E2187A",
   "dir": "ltr",
   "lang": "en",
   "categories": ["shopping"],
@@ -27,7 +27,7 @@
   ],
   "shortcuts": [
     {
-      "name": "Shop Wigs",
+      "name": "Shop Beauty",
       "short_name": "Shop",
       "url": "/shop?source=pwa-shortcut",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]

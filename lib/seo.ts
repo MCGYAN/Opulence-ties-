@@ -7,17 +7,16 @@ import {
 } from '@/lib/site-brand';
 import type { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://hairreignsgh.com';
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://bibibeautystore.com';
 
 export const SEO_KEYWORDS = [
-  'human hair wigs Ghana',
-  'lace front wigs Ghana',
-  'closure units Ghana',
-  'frontal units Ghana',
-  'custom wigs Ghana',
-  'wig fixing Ghana',
-  'wig revamp Ghana',
-  'Hair Reigns GH',
+  'Bibi Beauty Store',
+  'makeup Accra',
+  'skincare Ghana',
+  'beauty products Darkuman',
+  'cosmetics Accra',
+  'pay on delivery beauty',
+  'nationwide beauty delivery Ghana',
   BUSINESS_CITY,
   BUSINESS_COUNTRY,
 ].filter(Boolean);
@@ -66,32 +65,32 @@ export function buildPageMetadata({
 export const pageSeoTemplates = {
   home: () =>
     buildPageMetadata({
-      title: `${SITE_NAME} | Premium Wigs & Hair Services in Ghana`,
+      title: `${SITE_NAME} | Makeup & Skincare in Accra`,
       description: SITE_DESCRIPTION,
       path: '/',
     }),
   shop: () =>
     buildPageMetadata({
-      title: `Shop Wigs & Hair | ${SITE_NAME}`,
-      description: `Browse human-hair wigs, closures, frontals and services at ${SITE_NAME}. Order via WhatsApp.`,
+      title: `Shop Beauty | ${SITE_NAME}`,
+      description: `Browse makeup, skincare and beauty essentials at ${SITE_NAME}. Nationwide delivery and pay on delivery.`,
       path: '/shop',
     }),
   categories: () =>
     buildPageMetadata({
       title: `Categories | ${SITE_NAME}`,
-      description: `Shop ready-made wigs, closure units, frontal units and custom services at ${SITE_NAME}.`,
+      description: `Shop makeup, skincare and beauty essentials at ${SITE_NAME}.`,
       path: '/categories',
     }),
   about: () =>
     buildPageMetadata({
       title: `About | ${SITE_NAME}`,
-      description: `Meet ${SITE_NAME}, Ghana's destination for premium wigs, closures, frontals and expert hair services.`,
+      description: `Meet ${SITE_NAME} at Darkuman, Fadama Junction — beauty that helps you feel confident and glow.`,
       path: '/about',
     }),
   contact: () =>
     buildPageMetadata({
       title: `Contact | ${SITE_NAME}`,
-      description: `Call or WhatsApp ${SITE_NAME} to order wigs, book fixing or ask about custom units.`,
+      description: `Call or WhatsApp ${SITE_NAME} to order makeup, skincare and beauty products.`,
       path: '/contact',
     }),
 };

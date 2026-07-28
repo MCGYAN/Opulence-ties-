@@ -103,8 +103,8 @@ export default function ContactPage() {
   const contactAddress = getSetting('contact_address') || BUSINESS_ADDRESS;
 
   const heroTitle = pageContent?.title || `Contact ${SITE_NAME}`;
-  const heroSubtitle = pageContent?.subtitle || 'Order wigs, book fixing or ask about custom units, we reply fast on WhatsApp.';
-  const heroContent = pageContent?.content || 'Call, WhatsApp or send a message. We are here to help you find your perfect crown.';
+  const heroSubtitle = pageContent?.subtitle || 'Order makeup & skincare — we reply fast on WhatsApp.';
+  const heroContent = pageContent?.content || 'Call, WhatsApp or send a message. We are here to help you find your glow.';
 
   const waLink = WHATSAPP_URL;
   const telLink = `tel:${CONTACT_PHONE}`;
@@ -136,26 +136,26 @@ export default function ContactPage() {
       title: 'Visit Us',
       value: contactAddress,
       link: 'https://maps.google.com',
-      description: 'Ghana, nationwide delivery'
+      description: 'Darkuman, Fadama Junction',
     }
   ];
 
   const faqs = [
     {
       question: 'How do I place an order?',
-      answer: `Call ${CONTACT_PHONE_DISPLAY}, WhatsApp us, or add items to your cart and checkout. For custom wigs and services, message us first so we can confirm details.`,
+      answer: `Call ${CONTACT_PHONE_DISPLAY}, WhatsApp us, or add items to your cart and checkout. Not sure what suits your skin or look? Message us first — we will guide you.`,
     },
     {
-      question: 'What are your delivery times?',
-      answer: 'Standard delivery takes 2-5 business days across Ghana. Every wig is packed with care so your unit arrives in perfect condition.',
+      question: 'Do you deliver nationwide?',
+      answer: 'Yes. We deliver across Ghana. Standard delivery usually takes 2-5 business days depending on your location.',
     },
     {
-      question: 'Do you offer wig fixing and revamps?',
-      answer: 'Yes, we offer professional wig fixing, machine wig-making and revamp services. Book via WhatsApp to confirm availability and pricing.',
+      question: 'Can I pay on delivery?',
+      answer: 'Yes — pay on delivery is available so you can shop with confidence and glow without the stress.',
     },
     {
-      question: 'What payment methods do you accept?',
-      answer: 'We accept Mobile Money, bank transfer and card payments online. For custom orders, we may request a deposit, details shared on WhatsApp.',
+      question: 'Where are you located?',
+      answer: 'We are at Darkuman, Fadama Junction, Accra. Visit us or order for delivery.',
     },
   ];
 
@@ -164,7 +164,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title={`Contact ${SITE_NAME}`}
-        subtitle="Order wigs, book fixing or ask about custom units, we reply fast on WhatsApp."
+        subtitle="Order makeup & skincare — we reply fast on WhatsApp."
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

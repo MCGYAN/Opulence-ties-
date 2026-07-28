@@ -1,6 +1,6 @@
-# YOUR_PROJECT_NAME
+# Bibi Beauty Store
 
-> YOUR_PROJECT_DESCRIPTION
+> Makeup, skincare and beauty essentials in Accra — glow like you mean it.
 
 ## Getting Started
 

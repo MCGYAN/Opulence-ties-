@@ -4,20 +4,20 @@
 @tailwind utilities;
 
 :root {
-  /* Hair Reigns GH, soft blush, rose & white (no hard black) */
-  --brand-plum: #6b5560;
-  --brand-burgundy: #8b5a6b;
-  --brand-rose-gold: #e3187d;
-  --brand-sage: #f2a0c4;
-  --brand-cream: #fff8fb;
-  --brand-mocha: #6b5560;
-  --brand-latte: #fff0f7;
+  /* Bibi Beauty — soft blush pink, rose accents */
+  --brand-plum: #5c3a4a;
+  --brand-burgundy: #9a1458;
+  --brand-rose-gold: #e2187a;
+  --brand-sage: #f5a3c7;
+  --brand-cream: #fff7fb;
+  --brand-mocha: #7a6570;
+  --brand-latte: #fff0f6;
   --brand-ivory: #fffbfe;
   --brand-gold: var(--brand-rose-gold);
   --brand-nude: #fad9e8;
-  --brand-warm-dark: #8b5a6b;
+  --brand-warm-dark: #9a1458;
   --brand-royal-gold: var(--brand-rose-gold);
-  --brand-deep-black: #6b5560;
+  --brand-deep-black: #5c3a4a;
   --brand-champagne: #fce4ef;
 }
 
@@ -751,7 +751,7 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #FFF0F7 0%, #E3187D 55%, #FF4DA6 100%);
+  background: linear-gradient(135deg, #FFF0F6 0%, #E2187A 55%, #F06BA6 100%);
   animation: splashFadeOut 0.5s ease-out 1.5s forwards;
 }
 

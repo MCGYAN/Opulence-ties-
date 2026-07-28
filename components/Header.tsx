@@ -1,6 +1,6 @@
 'use client';
 
-import { SITE_NAME, HEADER_LOGO_PATH } from '@/lib/site-brand';
+import { SITE_NAME, LOGO_PATH } from '@/lib/site-brand';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { createPortal } from 'react-dom';
@@ -104,7 +104,7 @@ export default function Header() {
             <div className="lg:hidden flex items-center justify-between h-[4.5rem] gap-3">
               <Link href="/" className="flex shrink-0 select-none" aria-label="Go to homepage">
                 <img
-                  src={HEADER_LOGO_PATH}
+                  src={LOGO_PATH}
                   alt={siteName}
                   className="h-16 w-auto max-w-[min(62vw,260px)] object-contain object-left"
                 />
@@ -136,7 +136,7 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Link href="/" className="flex items-center select-none" aria-label="Go to homepage">
                   <img
-                    src={HEADER_LOGO_PATH}
+                    src={LOGO_PATH}
                     alt={siteName}
                     className={`w-auto object-contain transition-all duration-500 ${
                       scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[4.5rem] max-w-[300px]'

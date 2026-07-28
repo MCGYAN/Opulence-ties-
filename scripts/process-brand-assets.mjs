@@ -38,7 +38,7 @@ async function withWordmark(fill, outPath) {
     `<svg width="${w}" height="${pad}" xmlns="http://www.w3.org/2000/svg">
       <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
         font-family="Georgia, 'Times New Roman', serif" font-size="${fontSize}"
-        fill="${fill}">Hair Reigns</text>
+        fill="${fill}">YOUR_SITE_SHORT_NAME</text>
     </svg>`
   );
   await sharp({
@@ -60,7 +60,7 @@ async function withWordmark(fill, outPath) {
 await sharp(emblem).png().toFile('public/logo-mark.png');
 await withWordmark('#000000', 'public/logo-header.png');
 await withWordmark('#FFFFFF', 'public/logo-footer.png');
-await withWordmark('#E3187D', 'public/logo.png');
+await withWordmark('#2563EB', 'public/logo.png');
 
 await sharp('public/hero.jpg').jpeg({ quality: 92 }).toFile('public/hero-tmp.jpg');
 fs.renameSync('public/hero-tmp.jpg', 'public/hero.jpg');

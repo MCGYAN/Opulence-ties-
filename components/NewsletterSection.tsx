@@ -25,9 +25,9 @@ export default function NewsletterSection() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <h3 className="font-serif text-3xl md:text-4xl text-brand-plum mb-4">Never Miss a New Drop</h3>
+      <h3 className="font-serif text-3xl md:text-4xl text-brand-plum mb-4">Never Miss a Glow Drop</h3>
       <p className="text-brand-plum/70 mb-8 max-w-lg mx-auto">
-        Be first to know when fresh wigs and units land, plus exclusive offers for our community.
+        Be first to know about new makeup, skincare and offers — beauty that keeps you feeling ready.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
@@ -39,7 +39,7 @@ export default function NewsletterSection() {
           className="flex-1 boutique-input !py-3.5 text-center sm:text-left"
         />
         <button type="submit" disabled={isSubmitting} className="boutique-btn-primary disabled:opacity-70">
-          {isSubmitting ? 'Joining…' : 'Join the Crown List'}
+          {isSubmitting ? 'Joining…' : 'Join the Glow List'}
         </button>
       </form>
       {submitStatus === 'success' && (

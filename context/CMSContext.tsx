@@ -92,8 +92,8 @@ const defaultSettings: SiteSettings = {
     social_tiktok: SOCIAL_TIKTOK,
     social_snapchat: SOCIAL_SNAPCHAT,
     social_youtube: '',
-    primary_color: '#E3187D',
-    secondary_color: '#FF4DA6',
+    primary_color: '#E2187A',
+    secondary_color: '#F5A3C7',
     currency: 'USD',
     currency_symbol: '$',
 };
