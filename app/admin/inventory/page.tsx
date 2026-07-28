@@ -102,7 +102,8 @@ export default function InventoryManagementPage() {
 
   const handleExportCSV = () => {
     const csvData = [
-      ['SKU', 'Product Name', 'Category', 'Current Stock', 'Price', 'Status']...products.map(p => [
+      ['SKU', 'Product Name', 'Category', 'Current Stock', 'Price', 'Status'],
+      ...products.map(p => [
         p.sku,
         p.name,
         p.category,

@@ -159,7 +159,7 @@ export async function POST(request: Request) {
         images,
         referencedNames,
         prefix,
-        (p) => send('progress', { phase: 'uploading_images'...p })
+        (p) => send('progress', { phase: 'uploading_images', ...p })
       );
 
       send('progress', {
@@ -199,7 +199,7 @@ export async function POST(request: Request) {
           });
         }
       }
-      const allWarnings = [...warnings...categoryWarnings];
+      const allWarnings = [...warnings, ...categoryWarnings];
       const totalErrors = validationErrors.length + createErrors;
       const duration = `${Math.round((Date.now() - startTime) / 1000)}s`;
 

@@ -112,10 +112,10 @@ export default function ProductSalesStats({ isOpen, onClose }: { isOpen: boolean
 
                 // Convert to array and sort by items sold
                 const result = Array.from(map.values())
-                    .map(({ _orderIds, variants...rest }) => ({
+                    .map(({ _orderIds, variants, ...rest }) => ({
                         ...rest,
                         variants: Array.from(variants.entries())
-                            .map(([name, data]) => ({ name...data }))
+                            .map(([name, data]) => ({ name, ...data }))
                             .sort((a, b) => b.quantity - a.quantity)
                     }))
                     .sort((a, b) => b.itemsSold - a.itemsSold);

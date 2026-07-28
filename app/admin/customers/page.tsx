@@ -176,7 +176,7 @@ export default function AdminCustomersPage() {
         };
       });
 
-      setCustomers([...registeredCustomers...guestCustomers]);
+      setCustomers([...registeredCustomers, ...guestCustomers]);
     } catch (error) {
       console.error('Error in fallback fetch:', error);
     } finally {

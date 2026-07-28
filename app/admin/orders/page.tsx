@@ -230,7 +230,8 @@ export default function AdminOrdersPage() {
           fetch('/api/notifications', {
             method: 'POST',
             headers: { 
-              'Content-Type': 'application/json'...(authToken && { 'Authorization': `Bearer ${authToken}` })
+              'Content-Type': 'application/json',
+              ...(authToken && { 'Authorization': `Bearer ${authToken}` })
             },
             body: JSON.stringify({
               type: 'order_updated',

@@ -66,7 +66,8 @@ export default function ProductFilters({ onFilterChange }: ProductFiltersProps) 
       brands: selectedBrands,
       ratings: selectedRatings,
       inStock,
-      onSale...updates
+      onSale,
+      ...updates
     });
   };
 

@@ -154,7 +154,7 @@ export default function ModulesPage() {
     }
   };
 
-  const categories = ['all'...Array.from(new Set(modules.map(m => m.category)))];
+  const categories = ['all', ...Array.from(new Set(modules.map(m => m.category)))];
 
   /* Lock Screen Logic */
   const [isLocked, setIsLocked] = useState(true);

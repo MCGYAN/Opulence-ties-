@@ -92,7 +92,7 @@ export default function POSPage() {
 
                 // Extract Categories
                 const cats = Array.from(new Set(formatted.map(p => p.category))).sort();
-                setCategories(['All'...cats]);
+                setCategories(['All', ...cats]);
             }
 
             // Fetch Customers from customers table (not profiles)
@@ -353,7 +353,8 @@ export default function POSPage() {
                     fetch('/api/notifications', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
+                            'Content-Type': 'application/json',
+                            ...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
                         },
                         body: JSON.stringify({
                             type: 'order_created',

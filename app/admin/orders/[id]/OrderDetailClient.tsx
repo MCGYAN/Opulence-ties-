@@ -161,7 +161,8 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
         fetch('/api/notifications', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'...(authToken && { 'Authorization': `Bearer ${authToken}` })
+            'Content-Type': 'application/json',
+            ...(authToken && { 'Authorization': `Bearer ${authToken}` })
           },
           body: JSON.stringify({
             type: 'order_status',
@@ -208,7 +209,8 @@ export default function OrderDetailClient({ orderId }: OrderDetailClientProps) {
       const response = await fetch('/api/notifications', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'...(authToken && { 'Authorization': `Bearer ${authToken}` })
+          'Content-Type': 'application/json',
+          ...(authToken && { 'Authorization': `Bearer ${authToken}` })
         },
         body: JSON.stringify({
           type: 'order_status',
