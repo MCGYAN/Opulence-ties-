@@ -117,10 +117,10 @@ export default function Home() {
       {/* Marquee */}
       <div className="royalty-marquee border-y border-white/5 bg-[#0A0A0A]" aria-hidden>
         <div className="royalty-marquee-track">
-          {Array.from({ length: 2 }).map((_, copy) => (
-            <div key={copy} className="flex">
+          {Array.from({ length: 2 }).map((_, band) => (
+            <div key={band} className="flex">
               {Array.from({ length: 6 }).map((__, index) => (
-                <span key={`${copy}-${index}`} className="px-6 md:px-8 py-3 md:py-4 text-[9px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-[#DAA520]">
+                <span key={`${band}-${index}`} className="px-6 md:px-8 py-3 md:py-4 text-[9px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-[#DAA520]">
                   ✦ {copy.marquee} ✦
                 </span>
               ))}

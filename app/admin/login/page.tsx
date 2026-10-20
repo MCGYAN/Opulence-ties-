@@ -44,11 +44,13 @@ export default function AdminLoginPage() {
 
       if (error) throw error;
 
-      if (data.session) {
+      const accessToken = data.session?.access_token;
+      const refreshToken = data.session?.refresh_token;
+      if (accessToken && refreshToken) {
         const secureAttr = window.location.protocol === 'https:' ? '; Secure' : '';
         // Set auth cookie so middleware can verify the session server-side
-        document.cookie = `sb-access-token=${data.session.access_token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax${secureAttr}`;
-        document.cookie = `sb-refresh-token=${data.session.refresh_token}; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Lax${secureAttr}`;
+        document.cookie = `sb-access-token=${accessToken}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax${secureAttr}`;
+        document.cookie = `sb-refresh-token=${refreshToken}; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Lax${secureAttr}`;
 
         router.push('/admin');
         router.refresh();

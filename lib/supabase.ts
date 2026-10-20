@@ -49,7 +49,7 @@ function offlineQuery(asSingle = false): Promise<OfflineResult> & Record<string,
         apply() {
             return offlineQuery(asSingle);
         },
-    }) as Promise<OfflineResult> & Record<string, unknown>;
+    }) as unknown as Promise<OfflineResult> & Record<string, unknown>;
 }
 
 function createOfflineClient() {
