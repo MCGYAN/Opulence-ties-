@@ -11,25 +11,23 @@ interface MobileSearchOverlayProps {
 export default function MobileSearchOverlay({ isOpen, onClose }: MobileSearchOverlayProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSearches, setRecentSearches] = useState([
-    'Summer Dress',
-    'Running Shoes',
-    'Leather Bag',
-    'Sunglasses'
+    'Sample Product',
+    'New Arrivals',
+    'Essentials',
   ]);
 
   const popularSearches = [
     'New Arrivals',
     'Sale Items',
-    'Dresses',
-    'Men\'s Shoes',
-    'Electronics',
-    'Bags & Purses'
+    'Category One',
+    'Category Two',
+    'Essentials',
   ];
 
   const searchSuggestions = [
-    { name: 'Summer Floral Dress', category: 'Women\'s Clothing', price: 'GH₵289', image: 'https://readdy.ai/api/search-image?query=elegant%20summer%20floral%20dress%20on%20white%20mannequin%20with%20simple%20clean%20white%20studio%20background%20soft%20natural%20lighting%20feminine%20style%20fashion%20photography%20high%20quality%20detailed&width=80&height=80&seq=mob1&orientation=squarish' },
-    { name: 'Classic Leather Handbag', category: 'Bags', price: 'GH₵459', image: 'https://readdy.ai/api/search-image?query=luxury%20brown%20leather%20handbag%20on%20white%20surface%20clean%20minimalist%20white%20studio%20background%20professional%20product%20photography%20high%20quality%20detailed%20premium%20fashion&width=80&height=80&seq=mob2&orientation=squarish' },
-    { name: 'Designer Sunglasses', category: 'Accessories', price: 'GH₵199', image: 'https://readdy.ai/api/search-image?query=stylish%20modern%20sunglasses%20on%20white%20display%20stand%20clean%20white%20studio%20background%20professional%20product%20photography%20high%20quality%20detailed%20fashion%20accessory&width=80&height=80&seq=mob3&orientation=squarish' }
+    { name: 'Sample Product One', category: 'Category One', price: 'GH₵85', image: '' },
+    { name: 'Sample Product Three', category: 'Category Two', price: 'GH₵120', image: '' },
+    { name: 'Sample Essential', category: 'Essentials', price: 'GH₵65', image: '' },
   ];
 
   useEffect(() => {
@@ -141,11 +139,15 @@ export default function MobileSearchOverlay({ isOpen, onClose }: MobileSearchOve
                   className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded-lg transition-colors"
                   onClick={onClose}
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-16 h-16 object-cover rounded-lg"
-                  />
+                  {product.image ? (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-16 h-16 object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-lg bg-gray-100" aria-hidden />
+                  )}
                   <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-medium text-gray-900 truncate">{product.name}</h4>
                     <p className="text-xs text-gray-500 mt-0.5">{product.category}</p>

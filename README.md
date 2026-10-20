@@ -1,6 +1,6 @@
-# Bibi Beauty Store
+# Store Template
 
-> Makeup, skincare and beauty essentials in Accra — glow like you mean it.
+> Ghana storefront starter — replace the `YOUR_*` placeholders, then launch.
 
 ## Getting Started
 
@@ -13,6 +13,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Without Supabase keys, the shop renders the sample catalog in `lib/mock-catalog.ts`.
+
 ## Environment Variables
 
 Copy `.env.example` to `.env.local` and set your Supabase, Moolre, Resend, and app URL values.
@@ -20,6 +22,8 @@ Copy `.env.example` to `.env.local` and set your Supabase, Moolre, Resend, and a
 ## Customization
 
 See [CUSTOMIZE.md](./CUSTOMIZE.md) and [public/ASSETS_GUIDE.md](./public/ASSETS_GUIDE.md).
+
+Brand name, contact details, hero copy, and reviews live in `lib/site-brand.ts`. Colors live in `tailwind.config.js` and `app/globals.css`.
 
 ## Deployment
 

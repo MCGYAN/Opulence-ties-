@@ -25,4 +25,60 @@ export function getSupabaseServerClient(): SupabaseClient | null {
     return serverClient;
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+type OfflineResult = { data: unknown; error: null; count: number; status: number; statusText: string };
+
+/** Query builder that resolves immediately when no database is connected. */
+function offlineQuery(asSingle = false): Promise<OfflineResult> & Record<string, unknown> {
+    const result: OfflineResult = {
+        data: asSingle ? null : [],
+        error: null,
+        count: 0,
+        status: 200,
+        statusText: 'OK',
+    };
+    const promise = Promise.resolve(result);
+    const run = () => offlineQuery(asSingle);
+    return new Proxy(run, {
+        get(_target, prop) {
+            if (prop === 'then') return promise.then.bind(promise);
+            if (prop === 'catch') return promise.catch.bind(promise);
+            if (prop === 'finally') return promise.finally.bind(promise);
+            if (prop === 'single' || prop === 'maybeSingle') return () => offlineQuery(true);
+            return run;
+        },
+        apply() {
+            return offlineQuery(asSingle);
+        },
+    }) as Promise<OfflineResult> & Record<string, unknown>;
+}
+
+function createOfflineClient() {
+    return {
+        from: () => offlineQuery(),
+        rpc: () => offlineQuery(),
+        channel: () => offlineQuery(),
+        removeChannel: () => Promise.resolve('ok'),
+        auth: {
+            getSession: async () => ({ data: { session: null }, error: null }),
+            getUser: async () => ({ data: { user: null }, error: null }),
+            signInWithPassword: async () => ({ data: { user: null, session: null }, error: { message: 'Demo office' } }),
+            signUp: async () => ({ data: { user: null, session: null }, error: { message: 'Demo office' } }),
+            signOut: async () => ({ error: null }),
+            updateUser: async () => ({ data: { user: null }, error: null }),
+            resetPasswordForEmail: async () => ({ data: {}, error: null }),
+            onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }),
+        },
+        storage: {
+            from: () => ({
+                upload: async () => ({ data: null, error: { message: 'Demo office' } }),
+                list: async () => ({ data: [], error: null }),
+                remove: async () => ({ data: [], error: null }),
+                getPublicUrl: () => ({ data: { publicUrl: '' } }),
+            }),
+        },
+    };
+}
+
+export const supabase = (isSupabaseConfigured()
+    ? createClient(supabaseUrl, supabaseKey)
+    : createOfflineClient()) as SupabaseClient;

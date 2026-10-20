@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState, useEffect } from 'react';
+import DemoOrderReceipt from '@/components/DemoOrderReceipt';
+import { getDemoOrder, type DemoOrder } from '@/lib/demo-orders';
+import { isMockCatalogMode } from '@/lib/mock-catalog';
 import { supabase } from '@/lib/supabase';
 
 function OrderSuccessContent() {
@@ -10,6 +13,7 @@ function OrderSuccessContent() {
   const orderNumber = searchParams.get('order');
   const paymentSuccess = searchParams.get('payment_success');
   const [order, setOrder] = useState<any>(null);
+  const [demoOrder, setDemoOrder] = useState<DemoOrder | null>(null);
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(true);
   const [verifying, setVerifying] = useState(false);
@@ -17,6 +21,13 @@ function OrderSuccessContent() {
   useEffect(() => {
     async function fetchOrder() {
       if (!orderNumber) {
+        setLoading(false);
+        return;
+      }
+
+      const demo = getDemoOrder(orderNumber);
+      if (demo || isMockCatalogMode()) {
+        setDemoOrder(demo);
         setLoading(false);
         return;
       }
@@ -94,6 +105,10 @@ function OrderSuccessContent() {
       setVerifying(false);
     }
   };
+
+  if (demoOrder) {
+    return <DemoOrderReceipt order={demoOrder} mode="success" />;
+  }
 
   if (loading) {
     return (

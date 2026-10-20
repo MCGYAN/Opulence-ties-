@@ -1,33 +1,38 @@
 /**
- * Bibi Beauty Store — brand identity & site copy
+ * Opulence Ties — brand identity matched to opulenceties.com
  */
 
-export const SITE_NAME = 'Bibi Beauty Store';
-export const SITE_SHORT_NAME = 'Bibi Beauty';
+import { OPULENCE_SHOP_CATEGORIES } from '@/lib/opulence-catalog';
+
+export const SITE_NAME = 'Opulence Ties';
+export const SITE_SHORT_NAME = 'OpulenceTies';
 export const SITE_DESCRIPTION =
-  'Makeup, skincare and beauty essentials in Accra — so you walk out glowing, feeling confident, and ready for every moment.';
-export const SITE_TAGLINE = 'Glow Like You Mean It.';
-export const SITE_HERO_TAGLINE = 'Beauty that makes you feel unforgettable.';
-export const SITE_LOCATION_TAGLINE = 'Darkuman, Accra';
+  'Discover premium luxury fashion and accessories at Opulence Ties. Curated collection of high-end ties, fashion pieces, and exclusive accessories for the discerning individual.';
+export const SITE_TAGLINE = 'The Culture Of Royalty';
+export const SITE_HERO_TAGLINE = 'Discover Your Favourite Collections.';
+export const SITE_LOCATION_TAGLINE = 'Lashibi, Ghana';
 
-export const HERO_HEADLINE = 'Wake Up Looking Like Your Softest Self.';
+export const HERO_HEADLINE = 'Discover Your Favourite';
 export const HERO_SUBHEADLINE =
-  'From everyday glam to skin that feels cared for — shop makeup and skincare you can trust, with nationwide delivery and pay on delivery.';
+  'Neckties, bow ties, cuffs and scarves, crafted for professionals who dress with presence.';
 
-export const SITE_URL = 'https://bibibeautystore.com';
-export const CONTACT_EMAIL = 'hello@bibibeautystore.com';
-export const CONTACT_PHONE = '0243849598';
-export const CONTACT_PHONE_DISPLAY = '024 384 9598';
-export const CONTACT_PHONE_SECONDARY = '0531724359';
-export const CONTACT_PHONE_SECONDARY_DISPLAY = '053 172 4359';
-export const WHATSAPP_URL = 'https://wa.me/233243849598';
-export const BUSINESS_ADDRESS = 'Darkuman, Fadama Junction, Accra';
-export const BUSINESS_CITY = 'Accra';
+export const SITE_URL = 'https://www.opulenceties.com';
+export const CONTACT_EMAIL = 'Support@opulenceties.com';
+export const CONTACT_EMAIL_SECONDARY = 'Opulenceties@gmail.com';
+export const CONTACT_PHONE = '0241448340';
+export const CONTACT_PHONE_DISPLAY = '+233 241 448 340';
+export const CONTACT_PHONE_SECONDARY = '0595008581';
+export const CONTACT_PHONE_SECONDARY_DISPLAY = '+233 595 008 581';
+export const WHATSAPP_URL = 'https://wa.me/233241448340';
+export const BUSINESS_ADDRESS = '15 Baussino Street, Lashibi Community 18';
+export const BUSINESS_CITY = 'Lashibi';
 export const BUSINESS_COUNTRY = 'Ghana';
+export const USA_ADDRESS = '1 Remsen Road, Apt 4K, Yonkers, NY 10710';
+export const USA_PHONE = '+1 (914) 267-7187';
+export const USA_PHONE_TEL = '+19142677187';
 
-export const LOGO_VERSION = '5';
+export const LOGO_VERSION = '3';
 export const LOGO_PATH = `/logo.png?v=${LOGO_VERSION}`;
-/** Same mark everywhere — header, footer, splash */
 export const HEADER_LOGO_PATH = LOGO_PATH;
 export const FOOTER_LOGO_PATH = LOGO_PATH;
 
@@ -38,66 +43,65 @@ export function resolveSiteLogo(cmsValue?: string | null): string {
 }
 
 export const OG_IMAGE_PATH = '/og-image.png';
-export const HERO_IMAGE_VERSION = '6';
-export const HERO_IMAGE_PATH = `/hero.jpg?v=${HERO_IMAGE_VERSION}`;
+export const HERO_IMAGE_VERSION = '2';
+export const HERO_IMAGE_PATH = '/hero/slide-2.jpeg';
 
+/** Same four backgrounds as opulenceties.com, in the same order. */
 export const HERO_SLIDES = [
-  {
-    src: `/hero.jpg?v=${HERO_IMAGE_VERSION}`,
-    alt: 'Bibi Beauty — polished makeup glow, serene and radiant',
-  },
+  { src: '/hero/slide-1.jpeg', alt: 'Opulence Ties neckties in a woven display' },
+  { src: '/hero/slide-2.jpeg', alt: 'Opulence Ties bow ties in black, teal, burgundy and navy' },
+  { src: '/hero/slide-3.jpeg', alt: 'Opulence Ties striped and patterned neckties' },
+  { src: '/hero/slide-4.jpg', alt: 'Opulence Ties necktie styled on a white shirt' },
 ] as const;
 
-export const SOCIAL_INSTAGRAM = 'https://instagram.com/bibibeautystore';
-export const SOCIAL_FACEBOOK = '';
+export const SOCIAL_INSTAGRAM = 'https://instagram.com/opulence_ties';
+export const SOCIAL_FACEBOOK = 'https://facebook.com/opulenceties';
 export const SOCIAL_TIKTOK = '';
 export const SOCIAL_SNAPCHAT = '';
 
-export const DEFAULT_PRODUCT_BRAND = 'Bibi Beauty';
-export const CATALOG_PDF_PREFIX = 'bibi-beauty-catalog';
+export const DEFAULT_PRODUCT_BRAND = 'Opulence';
+export const CATALOG_PDF_PREFIX = 'opulence-ties-catalog';
 
 export const FEATURED_BENEFITS = [
-  { label: 'Glow', title: 'Makeup That Feels Like You' },
-  { label: 'Care', title: 'Skincare That Comforts Skin' },
-  { label: 'Nationwide', title: 'Delivery Across Ghana' },
-  { label: 'Easy', title: 'Pay On Delivery' },
+  { label: 'Craft', title: 'Custom-Made Neckties' },
+  { label: 'Style', title: 'Professional Styling' },
+  { label: 'Heritage', title: 'Ghanaian Identity' },
+  { label: 'Presence', title: 'Dress With Authority' },
 ] as const;
 
-export const SHOP_CATEGORIES = [
-  { label: 'Makeup', href: '/shop?category=makeup' },
-  { label: 'Skincare', href: '/shop?category=skincare' },
-  { label: 'Beauty Essentials', href: '/shop?category=beauty-essentials' },
-  { label: 'New Arrivals', href: '/shop?category=new-arrivals' },
-] as const;
+export const SHOP_CATEGORIES = OPULENCE_SHOP_CATEGORIES.map((category) => ({
+  label: category.label,
+  href: category.href,
+}));
 
 export const CUSTOMER_REVIEWS = [
   {
-    text: 'I finally found a lip combo that stays and still feels soft. I walked into the room feeling like myself — just brighter.',
+    text: 'The necktie sits clean and the fabric feels made for the room, not borrowed from it.',
     rating: 5,
   },
   {
-    text: 'Ordered skincare on WhatsApp, paid on delivery, and my face has never felt this calm. Real products, real results.',
+    text: 'I ordered a custom piece for a ceremony. The finish looked considered, not mass-produced.',
     rating: 5,
   },
   {
-    text: 'From Darkuman to my doorstep — packaging was neat and the glow was instant. Bibi Beauty gets it.',
+    text: 'Gye Nyame in the weave is quiet until you notice it. That is exactly the point.',
     rating: 5,
   },
   {
-    text: 'The foundation matched perfectly and the team helped me choose. I feel confident without trying too hard.',
+    text: 'From Lashibi to my door. Packaging was sharp and the knot held all evening.',
     rating: 5,
   },
 ] as const;
 
-export const ABOUT_HEADLINE = 'Beauty That Starts With How You Feel';
+export const ABOUT_HEADLINE = 'A Ghanaian necktie house';
 export const ABOUT_BODY =
-  'is Accra’s neighbourhood beauty destination at Darkuman, Fadama Junction — built for women who want to look polished and feel powerful. We stock makeup, skincare and beauty essentials you can count on, deliver nationwide, and make checkout easy with pay on delivery. When you shop with us, you are not just buying products. You are choosing the version of you that walks in glowing.';
+  'is a Ghanaian necktie and scarves manufacturing business for fashion-conscious professionals and companies. We craft custom-made neckties and complementary accessories, then help clients wear them with intention.';
 
 export const BRAND_COLORS = {
-  pink: '#E2187A',
-  softRose: '#F5A3C7',
-  ink: '#5C3A4A',
-  blush: '#FFF0F6',
-  cream: '#FFF7FB',
+  primary: '#DAA520',
+  accent: '#DC2626',
+  ink: '#111111',
+  surface: '#FFFFFF',
+  cream: '#FFFFFF',
   white: '#FFFFFF',
 } as const;

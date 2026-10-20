@@ -1,207 +1,239 @@
 'use client';
 
-import {
-  SITE_NAME,
-  SITE_SHORT_NAME,
-  HERO_HEADLINE,
-  HERO_SUBHEADLINE,
-  HERO_SLIDES,
-  FEATURED_BENEFITS,
-  CUSTOMER_REVIEWS,
-  ABOUT_HEADLINE,
-  ABOUT_BODY,
-} from '@/lib/site-brand';
-import { MOCK_SHOP_CATEGORIES, MOCK_FEATURED_PRODUCTS } from '@/lib/mock-catalog';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import HeroImageSlider from '@/components/HeroImageSlider';
-import MockCategoryCard from '@/components/MockCategoryCard';
-import MockProductCard from '@/components/MockProductCard';
-import AnimatedSection, { AnimatedGrid } from '@/components/AnimatedSection';
-import NewsletterSection from '@/components/NewsletterSection';
+import { useRouter } from 'next/navigation';
+import { OPULENCE_PRODUCTS, OPULENCE_SHOP_CATEGORIES } from '@/lib/opulence-catalog';
+import { loadSiteCopy } from '@/lib/site-copy';
+import { useCart } from '@/context/CartContext';
 import { usePageTitle } from '@/hooks/usePageTitle';
+
+const FEATURED = OPULENCE_PRODUCTS.filter((product) => product.featured && product.quantity > 0).slice(0, 8);
 
 export default function Home() {
   usePageTitle('');
+  const router = useRouter();
+  const { addToCart } = useCart();
+  const [slide, setSlide] = useState(1);
+  const [word, setWord] = useState(1);
+  const [ready, setReady] = useState(false);
+  const [copy, setCopy] = useState(loadSiteCopy);
+
+  useEffect(() => {
+    setCopy(loadSiteCopy());
+  }, []);
+
+  const slides = copy.heroSlides;
+  const rotating = [copy.heroWord1, copy.heroWord2].filter((label) => label.trim());
+
+  useEffect(() => {
+    setReady(true);
+    const id = setInterval(() => {
+      setSlide((current) => (current + 1) % Math.max(slides.length, 1));
+      setWord((current) => (current + 1) % Math.max(rotating.length, 1));
+    }, 5000);
+    return () => clearInterval(id);
+  }, [slides.length, rotating.length]);
 
   return (
-    <main className="min-h-screen bg-brand-cream">
-      {/* SECTION 1 HERO */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-brand-cream">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-cream via-brand-latte to-brand-champagne/40" />
-        <div className="absolute top-1/4 -left-20 w-72 h-72 rounded-full bg-brand-rose/8 blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 -right-16 w-96 h-96 rounded-full bg-brand-sage/25 blur-3xl animate-float animate-delay-300" />
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none select-none">
-          <span className="font-serif text-[14vw] text-brand-rose/[0.06] whitespace-nowrap tracking-tight">
-            {SITE_SHORT_NAME}
-          </span>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <AnimatedSection>
-              <p className="text-[10px] font-semibold tracking-[0.32em] uppercase text-brand-plum/45 mb-5 flex items-center gap-3">
-                <span className="h-px w-8 bg-brand-plum/25" />
-                {SITE_NAME}
-              </p>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] text-brand-plum leading-[1.02] mb-6">
-                {HERO_HEADLINE}
-              </h1>
-              <p className="text-brand-plum/75 text-lg md:text-xl max-w-lg mb-10 leading-relaxed font-light">
-                {HERO_SUBHEADLINE}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/shop" className="boutique-btn-primary">
-                  Shop the glow
-                </Link>
-                <Link href="#shop-by-category" className="boutique-btn-secondary">
-                  Browse collections
-                </Link>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={150}>
-              <div className="relative md:p-4 md:glass-card md:rounded-[2rem] md:shadow-boutique-lg">
-                <HeroImageSlider slides={HERO_SLIDES} />
-              </div>
-            </AnimatedSection>
+    <main className="min-h-screen bg-[#F7F4EF] text-black">
+      {/* Sleek Hero Section */}
+      <section className="relative h-[80vh] min-h-[500px] md:min-h-[600px] w-full overflow-hidden bg-[#050505]">
+        {slides.map((hero, index) => (
+          <div
+            key={`${hero.src}-${index}`}
+            className={`absolute inset-0 transition-all duration-[1500ms] ease-out ${
+              index === slide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+            }`}
+          >
+            <img src={hero.src} alt={hero.alt} className="h-full w-full object-cover object-center opacity-70 md:opacity-80" />
           </div>
-        </div>
-      </section>
-
-      {/* SECTION 2, TRUST STRIP (tablet & desktop only) */}
-      <section className="hidden md:block py-10 md:py-14 bg-brand-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-2xl glass-frosted overflow-hidden">
-            <div
-              className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-rose/30 to-transparent"
-              aria-hidden
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-brand-rose/10">
-              {FEATURED_BENEFITS.map((benefit, i) => (
-                <div
-                  key={benefit.title}
-                  className="group relative px-6 py-8 md:px-8 md:py-10 text-center"
-                >
+        ))}
+        {/* Rich dark gradient for text readability and luxury feel */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 md:bg-gradient-to-r md:from-black/90 md:via-black/40 md:to-transparent" />
+        
+        <div className="relative h-full max-w-[1380px] mx-auto px-5 py-8 flex flex-col justify-end md:justify-center">
+          <div
+            className={`max-w-2xl transition-all duration-1000 ${
+              ready ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}
+          >
+            <span className="mb-4 inline-block border border-[#DAA520]/50 bg-black/40 px-3 py-1 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-[#DAA520] backdrop-blur-sm">
+              {copy.heroEyebrow}
+            </span>
+            <h1 className="mb-6 text-4xl sm:text-5xl font-bold leading-[1.15] text-white lg:text-7xl tracking-tight">
+              {copy.heroLine1}
+              <br />
+              {copy.heroLine2}
+              <br />
+              <span className="relative inline-block min-h-[1.2em] min-w-[12ch] text-[#DAA520]">
+                {rotating.map((label, index) => (
                   <span
-                    className={`block font-serif text-2xl md:text-3xl tabular-nums mb-3 transition-colors duration-300 ${
-                      i === 0 ? 'text-brand-rose/40 group-hover:text-brand-rose' : 'text-brand-rose/15 group-hover:text-brand-rose/35'
+                    key={label}
+                    className={`absolute left-0 transition-all duration-500 ${
+                      index === word ? 'translate-y-0 opacity-100 blur-0' : 'pointer-events-none translate-y-4 opacity-0 blur-sm'
                     }`}
                   >
-                    {String(i + 1).padStart(2, '0')}
+                    {label}
                   </span>
-                  <span className="block w-6 h-px bg-brand-rose/25 mx-auto mb-4 group-hover:w-10 group-hover:bg-brand-rose/50 transition-all duration-300" />
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-plum/45 mb-2">
-                    {benefit.label}
-                  </p>
-                  <p className="font-serif text-base md:text-lg text-brand-plum leading-snug">
-                    {benefit.title}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </span>
+            </h1>
+            <div className="flex flex-wrap items-center gap-3 md:gap-4">
+              <Link
+                href="/shop"
+                className="inline-flex h-12 md:h-14 items-center justify-center bg-[#DAA520] px-8 md:px-10 text-xs md:text-sm font-bold uppercase tracking-widest text-black transition-all hover:bg-[#F3D27A] hover:shadow-[0_0_20px_rgba(218,165,32,0.3)]"
+              >
+                {copy.heroShop}
+              </Link>
+              <a
+                href="#collections"
+                className="inline-flex h-12 md:h-14 items-center justify-center border border-white/30 px-8 md:px-10 text-xs md:text-sm font-bold uppercase tracking-widest text-white transition-all hover:border-white hover:bg-white hover:text-black"
+              >
+                {copy.heroExplore}
+              </a>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* SECTION 3, SHOP BY CATEGORY */}
-      <section id="shop-by-category" className="py-16 md:py-24 bg-brand-cream scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12 md:mb-16">
-            <span className="boutique-section-eyebrow">Explore</span>
-            <h2 className="boutique-section-title mb-3">Shop By Category</h2>
-            <p className="text-brand-plum/70">Makeup, skincare and essentials — find your softest glow.</p>
-          </AnimatedSection>
-          <AnimatedGrid className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-            {MOCK_SHOP_CATEGORIES.map((cat, i) => (
-              <MockCategoryCard
-                key={cat.id}
-                label={cat.label}
-                href={cat.href}
-                image={cat.image}
-                index={i}
-              />
-            ))}
-          </AnimatedGrid>
+        {/* Minimalist slide indicators */}
+        <div className="absolute bottom-6 md:bottom-8 left-0 right-0 flex justify-center gap-2 md:gap-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              aria-label={`Go to slide ${index + 1}`}
+              onClick={() => {
+                setSlide(index);
+                setWord(index % Math.max(rotating.length, 1));
+              }}
+              className={`h-1 transition-all duration-500 ${
+                index === slide ? 'w-8 md:w-12 bg-[#DAA520]' : 'w-3 md:w-4 bg-white/30 hover:bg-white/60'
+              }`}
+            />
+          ))}
         </div>
       </section>
 
-      {/* SECTION 4, FEATURED PRODUCTS */}
-      <section id="featured-products" className="py-16 md:py-24 bg-white/60 scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12 md:mb-16">
-            <span className="boutique-section-eyebrow">Featured</span>
-            <h2 className="boutique-section-title mb-3">Featured Products</h2>
-            <p className="text-brand-plum/70">Favourites that make you feel polished, fresh and ready.</p>
-          </AnimatedSection>
-          <AnimatedGrid className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
-            {MOCK_FEATURED_PRODUCTS.map((product) => (
-              <MockProductCard
-                key={product.id}
-                slug={product.slug}
-                name={product.name}
-                category={product.category}
-                price={product.price}
-                originalPrice={'originalPrice' in product ? product.originalPrice : undefined}
-                image={product.image}
-                tagline={product.tagline}
-              />
-            ))}
-          </AnimatedGrid>
-          <div className="text-center mt-12">
-            <Link href="/shop" className="boutique-btn-secondary">
-              View all beauty
-            </Link>
+      {/* Marquee */}
+      <div className="royalty-marquee border-y border-white/5 bg-[#0A0A0A]" aria-hidden>
+        <div className="royalty-marquee-track">
+          {Array.from({ length: 2 }).map((_, copy) => (
+            <div key={copy} className="flex">
+              {Array.from({ length: 6 }).map((__, index) => (
+                <span key={`${copy}-${index}`} className="px-6 md:px-8 py-3 md:py-4 text-[9px] md:text-[11px] font-bold uppercase tracking-[0.3em] text-[#DAA520]">
+                  ✦ {copy.marquee} ✦
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Clean Collections Section - 2x2 Grid on Mobile */}
+      <section id="collections" className="bg-[#F7F4EF] py-16 md:py-24 scroll-mt-16">
+        <div className="mx-auto max-w-[1380px] px-3 sm:px-6 lg:px-8">
+          <div className="mb-10 md:mb-16 flex flex-col items-center text-center">
+            <p className="mb-3 md:mb-4 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-[#B8860B]">{copy.collectionsEyebrow}</p>
+            <h2 className="text-2xl font-bold uppercase tracking-widest text-black sm:text-3xl lg:text-4xl">{copy.collectionsTitle}</h2>
+            <div className="mt-4 md:mt-6 h-[1px] w-12 md:w-16 bg-[#B8860B]"></div>
           </div>
-        </div>
-      </section>
-
-      {/* SECTION 5, CUSTOMER REVIEWS */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12 md:mb-16">
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-brand-plum mb-3">
-              Glow Stories From Our Community
-            </h2>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {CUSTOMER_REVIEWS.map((review, i) => (
-              <div
-                key={i}
-                className="glass-card rounded-2xl p-6 md:p-8 boutique-card-hover"
+          
+          {/* Mobile: 2 columns, Desktop: 3 columns */}
+          <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:grid-cols-3">
+            {OPULENCE_SHOP_CATEGORIES.map((category) => (
+              <Link
+                key={category.id}
+                href={category.href}
+                className="group relative block aspect-[4/5] overflow-hidden bg-[#EAE8E3] border border-black/5"
               >
-                <div className="flex gap-0.5 text-brand-plum/30 mb-4">
-                  {[...Array(review.rating)].map((_, j) => (
-                    <i key={j} className="ri-star-fill text-sm text-brand-rose/70" />
-                  ))}
+                <img
+                  src={category.image}
+                  alt={category.label}
+                  className="h-full w-full object-cover opacity-90 transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:opacity-100"
+                />
+                {/* Refined rich gradient overlay so white text stands out */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10 transition-opacity duration-500 group-hover:opacity-70" />
+                
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-6 md:p-8 flex flex-col justify-end">
+                  <p className="mb-1 md:mb-2 text-[7px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-[#DAA520] opacity-90 transition-transform duration-500 group-hover:-translate-y-1">
+                    {category.productCount} Pieces
+                  </p>
+                  <h3 className="text-sm sm:text-xl md:text-2xl font-bold tracking-wider text-white transition-transform duration-500 group-hover:-translate-y-1">
+                    {category.label}
+                  </h3>
+                  <div className="mt-2 md:mt-4 h-[1px] w-6 md:w-12 bg-white/50 transition-all duration-500 ease-out group-hover:w-full group-hover:bg-[#DAA520]" />
                 </div>
-                <p className="text-brand-plum/90 text-sm md:text-base leading-relaxed">&ldquo;{review.text}&rdquo;</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 6, ABOUT */}
-      <section className="py-16 md:py-24 bg-brand-latte/50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <AnimatedSection>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-brand-plum mb-6">{ABOUT_HEADLINE}</h2>
-            <p className="text-brand-plum/80 text-lg leading-relaxed">{ABOUT_BODY}</p>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 mt-8 text-brand-plum font-semibold hover:text-brand-rose transition-colors"
-            >
-              Learn more <i className="ri-arrow-right-line" />
-            </Link>
-          </AnimatedSection>
-        </div>
-      </section>
+      {/* Sleek Featured Pieces Section - 2x2 Grid on Mobile */}
+      <section id="featured" className="bg-[#FBFAF7] py-16 md:py-24 text-black scroll-mt-16 border-t border-[#DAA520]/25">
+        <div className="mx-auto max-w-[1380px] px-3 sm:px-6 lg:px-8">
+          <div className="mb-10 md:mb-16 flex flex-col items-center text-center">
+            <p className="mb-3 md:mb-4 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-[#DAA520]">{copy.featuredEyebrow}</p>
+            <h2 className="text-2xl font-bold uppercase tracking-widest sm:text-3xl lg:text-4xl">{copy.featuredTitle}</h2>
+            <div className="mt-4 md:mt-6 h-[1px] w-12 md:w-16 bg-[#DAA520]"></div>
+          </div>
 
-      {/* SECTION 7, NEWSLETTER */}
-      <section className="py-16 md:py-20 bg-brand-cream">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="glass-frosted rounded-3xl p-8 md:p-12">
-            <NewsletterSection />
+          {/* Grid Layout for Featured - 2 cols on mobile, 4 on desktop */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+            {FEATURED.map((product) => (
+              <article
+                key={product.id}
+                className="group flex flex-col"
+              >
+                <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-[#EFEAE2] border border-black/5">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-cover opacity-90 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+                  />
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4 border border-[#DAA520]/40 bg-black/75 px-2 py-1 md:px-3 md:py-1.5 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#DAA520]">
+                    {product.quantity <= 15 ? `Only ${product.quantity} left` : `${product.quantity} in stock`}
+                  </div>
+                  {/* Subtle hover overlay */}
+                  <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/5 pointer-events-none" />
+                </Link>
+                <div className="pt-4 md:pt-6 flex flex-col flex-1">
+                  <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-[#DAA520] mb-1.5 md:mb-2">{product.category}</p>
+                  <Link href={`/product/${product.slug}`} className="text-xs sm:text-sm md:text-base lg:text-lg font-medium tracking-wide line-clamp-2 hover:text-[#B8860B] transition-colors">
+                    {product.name.trim()}
+                  </Link>
+                  <p className="mt-1.5 md:mt-2 text-xs md:text-sm font-semibold text-black/70">GH₵{product.price.toFixed(2)}</p>
+                  
+                  <div className="mt-auto pt-4 md:pt-5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addToCart({
+                          id: product.id,
+                          name: product.name.trim(),
+                          price: product.price,
+                          image: product.image,
+                          quantity: 1,
+                          slug: product.slug,
+                          maxStock: product.quantity,
+                          moq: 1,
+                        });
+                        router.push('/checkout');
+                      }}
+                      className="w-full border border-black/15 bg-transparent py-2.5 md:py-3.5 text-[9px] md:text-xs font-medium uppercase tracking-[0.2em] text-black/70 transition-colors hover:border-black hover:bg-black hover:text-white"
+                    >
+                      {copy.buyNow}
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          
+          <div className="mt-12 md:mt-16 flex justify-center">
+            <Link href="/shop" className="inline-flex items-center gap-2 border-b border-[#DAA520] pb-1 text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-[#DAA520] transition-all hover:text-[#F3D27A] hover:border-[#F3D27A]">
+              {copy.featuredLink} <i className="ri-arrow-right-line" />
+            </Link>
           </div>
         </div>
       </section>

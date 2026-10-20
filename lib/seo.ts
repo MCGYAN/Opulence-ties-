@@ -7,16 +7,14 @@ import {
 } from '@/lib/site-brand';
 import type { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://bibibeautystore.com';
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.opulenceties.com';
 
 export const SEO_KEYWORDS = [
-  'Bibi Beauty Store',
-  'makeup Accra',
-  'skincare Ghana',
-  'beauty products Darkuman',
-  'cosmetics Accra',
-  'pay on delivery beauty',
-  'nationwide beauty delivery Ghana',
+  SITE_NAME,
+  'luxury ties',
+  'premium fashion',
+  'designer accessories',
+  'neckties Ghana',
   BUSINESS_CITY,
   BUSINESS_COUNTRY,
 ].filter(Boolean);
@@ -65,32 +63,32 @@ export function buildPageMetadata({
 export const pageSeoTemplates = {
   home: () =>
     buildPageMetadata({
-      title: `${SITE_NAME} | Makeup & Skincare in Accra`,
+      title: `${SITE_NAME} | Premium Luxury Fashion & Accessories`,
       description: SITE_DESCRIPTION,
       path: '/',
     }),
   shop: () =>
     buildPageMetadata({
-      title: `Shop Beauty | ${SITE_NAME}`,
-      description: `Browse makeup, skincare and beauty essentials at ${SITE_NAME}. Nationwide delivery and pay on delivery.`,
+      title: `Shop | ${SITE_NAME}`,
+      description: `Browse products at ${SITE_NAME}. Nationwide delivery and pay on delivery.`,
       path: '/shop',
     }),
   categories: () =>
     buildPageMetadata({
       title: `Categories | ${SITE_NAME}`,
-      description: `Shop makeup, skincare and beauty essentials at ${SITE_NAME}.`,
+      description: `Shop by category at ${SITE_NAME}.`,
       path: '/categories',
     }),
   about: () =>
     buildPageMetadata({
       title: `About | ${SITE_NAME}`,
-      description: `Meet ${SITE_NAME} at Darkuman, Fadama Junction — beauty that helps you feel confident and glow.`,
+      description: `Meet ${SITE_NAME}, a Ghanaian necktie and scarves house.`,
       path: '/about',
     }),
   contact: () =>
     buildPageMetadata({
       title: `Contact | ${SITE_NAME}`,
-      description: `Call or WhatsApp ${SITE_NAME} to order makeup, skincare and beauty products.`,
+      description: `Call or WhatsApp ${SITE_NAME} to place an order.`,
       path: '/contact',
     }),
 };

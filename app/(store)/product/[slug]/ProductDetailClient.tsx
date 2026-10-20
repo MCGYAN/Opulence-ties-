@@ -12,9 +12,10 @@ import {
 } from '@/lib/mock-catalog';
 import { cachedQuery } from '@/lib/query-cache';
 import ProductCard from '@/components/ProductCard';
+import ProductShare from '@/components/ProductShare';
 import ProductReviews from '@/components/ProductReviews';
 import { StructuredData, generateProductSchema, generateBreadcrumbSchema } from '@/components/SEOHead';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { usePageTitle } from '@/hooks/usePageTitle';
 
@@ -47,6 +48,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
 
   const { addToCart } = useCart();
+  const router = useRouter();
   const renderNameWithPlainAmpersand = (text: string) =>
     text.split('&').map((part, index, arr) => (
       <Fragment key={`${part}-${index}`}>
@@ -248,7 +250,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
 
   const handleBuyNow = () => {
     handleAddToCart();
-    window.location.href = '/checkout';
+    router.push('/checkout');
   };
 
   if (loading) {
@@ -626,6 +628,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                       Buy Now
                     </button>
                   )}
+                </div>
+
+                <div className="mb-8">
+                  <ProductShare name={product.name} price={activePrice} image={product.images?.[0]} />
                 </div>
 
                 <div className="border-t border-brand-gold/20 pt-6 space-y-4">

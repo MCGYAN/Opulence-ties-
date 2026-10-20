@@ -34,12 +34,5 @@ yarn-error.log*
 
 .vercel
 
-# Local bulk import assets (CSV is tracked; binaries stay on disk)
-data/imports/perfume-batch-01/perfume-batch-01-import.zip
-data/imports/perfume-batch-01/images/*
-!data/imports/perfume-batch-01/images/.gitkeep
-data/imports/perfume-batch-02/perfume-batch-02-import.zip
-data/imports/perfume-batch-02/images/*
-data/imports/perfume-batch-03/perfume-batch-03-import.zip
-data/imports/perfume-batch-03/images/*
-!data/imports/perfume-batch-03/images/.gitkeep
+# Copyrighted source material, not part of the store
+100m-Offers.pdf

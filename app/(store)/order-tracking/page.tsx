@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import DemoOrderReceipt from '@/components/DemoOrderReceipt';
+import { findDemoOrder, type DemoOrder } from '@/lib/demo-orders';
+import { isMockCatalogMode } from '@/lib/mock-catalog';
 import { supabase } from '@/lib/supabase';
 
 function OrderTrackingContent() {
@@ -13,8 +16,10 @@ function OrderTrackingContent() {
   const [email, setEmail] = useState('');
   const [isTracking, setIsTracking] = useState(false);
   const [order, setOrder] = useState<any>(null);
+  const [demoOrder, setDemoOrder] = useState<DemoOrder | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const guestTracking = isMockCatalogMode();
 
   // Auto-track if order number AND email are in the URL
   const urlEmail = searchParams.get('email') || '';
@@ -84,18 +89,35 @@ function OrderTrackingContent() {
   }, [email]);
 
   useEffect(() => {
+    if (guestTracking && urlOrderNumber) {
+      const found = findDemoOrder(urlOrderNumber);
+      if (found) setDemoOrder(found);
+      return;
+    }
     if (urlOrderNumber && urlEmail) {
       setEmail(urlEmail);
       fetchOrder(urlOrderNumber, urlEmail);
     }
-  }, [urlOrderNumber, urlEmail, fetchOrder]);
+  }, [urlOrderNumber, urlEmail, fetchOrder, guestTracking]);
 
   const handleTrack = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     if (!orderNumber) {
-      setError('Please enter your order number');
+      setError(guestTracking ? 'Enter your order number or WhatsApp number' : 'Please enter your order number');
+      return;
+    }
+
+    if (guestTracking) {
+      const found = findDemoOrder(orderNumber);
+      if (!found) {
+        setError('No order matches that number or WhatsApp. Place a guest order first, then track it here.');
+        setDemoOrder(null);
+        return;
+      }
+      setDemoOrder(found);
+      setError('');
       return;
     }
 
@@ -181,6 +203,10 @@ function OrderTrackingContent() {
     return statusMap[order.status] || { label: order.status, color: 'bg-gray-100 text-gray-800' };
   };
 
+  if (demoOrder) {
+    return <DemoOrderReceipt order={demoOrder} mode="tracking" />;
+  }
+
   // Search form
   if (!isTracking || !order) {
     return (
@@ -188,25 +214,29 @@ function OrderTrackingContent() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Track Your Order</h1>
-            <p className="text-gray-600">Enter your order number or tracking number to track your shipment</p>
+            <p className="text-gray-600">
+              {guestTracking
+                ? 'Use the order code from checkout, or the WhatsApp number you paid with.'
+                : 'Enter your order number or tracking number to track your shipment'}
+            </p>
           </div>
 
           <div className="bg-white rounded-xl shadow-sm p-8">
             <form onSubmit={handleTrack} className="space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-900 mb-2">
-                  Order Number or Tracking Number
+                  {guestTracking ? 'Order number or WhatsApp' : 'Order Number or Tracking Number'}
                 </label>
                 <input
                   type="text"
                   value={orderNumber}
                   onChange={(e) => setOrderNumber(e.target.value)}
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="e.g. ORD-1770328211911-915 or SLI-ABC123"
+                  placeholder={guestTracking ? 'OT-4K2P or 024 000 0000' : 'e.g. ORD-1770328211911-915 or SLI-ABC123'}
                 />
               </div>
 
-              <div>
+              {!guestTracking && <div>
                 <label className="block text-sm font-semibold text-gray-900 mb-2">
                   Email Address <span className="text-red-500 font-normal">*</span>
                 </label>
@@ -217,7 +247,7 @@ function OrderTrackingContent() {
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="you@example.com"
                 />
-              </div>
+              </div>}
 
               {error && (
                 <div className="p-4 bg-red-50 border border-red-200 rounded-lg">

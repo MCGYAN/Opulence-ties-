@@ -3,12 +3,12 @@
 import { SITE_NAME, SITE_TAGLINE, LOGO_PATH, CONTACT_EMAIL, CONTACT_PHONE, BUSINESS_ADDRESS, SOCIAL_INSTAGRAM, SOCIAL_TIKTOK, CATALOG_PDF_PREFIX, OG_IMAGE_PATH, HERO_IMAGE_PATH, DEFAULT_PRODUCT_BRAND } from '@/lib/site-brand';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function AdminDashboard() {
   const [dateRange, setDateRange] = useState('7days'); // logic not implemented for this demo, just UI
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(isSupabaseConfigured());
 
   // Real Stats
   const [stats, setStats] = useState([
@@ -52,6 +52,8 @@ export default function AdminDashboard() {
   const [chartData, setChartData] = useState<any[]>([]);
 
   useEffect(() => {
+    if (!isSupabaseConfigured()) return;
+
     async function fetchDashboardData() {
       try {
         // 1. Fetch ALL Orders for count & customers
@@ -231,43 +233,39 @@ export default function AdminDashboard() {
   ];
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Loading Dashboard...</div>;
+    return <div className="p-8 text-center text-[#c4a15a]">Opening the desk...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-1">Welcome back! Here's what's happening with your store.</p>
-          </div>
+    <div>
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-[#c4a15a]">Today</p>
+          <h1 className="mt-1 text-3xl font-bold text-[#2a241e]">Dashboard</h1>
+          <p className="mt-1 text-sm text-[#2a241e]/60">The floor, the stock, and the orders, in one place.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
-            <div key={stat.title} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-4">
-                <div className={`w-12 h-12 flex items-center justify-center bg-${stat.color}-100 text-${stat.color}-700 rounded-lg`}>
-                  <i className={`${stat.icon} text-2xl`}></i>
+            <div key={stat.title} className="admin-panel rounded-2xl p-5">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#c4a15a]/30 text-[#c4a15a]">
+                  <i className={`${stat.icon} text-xl`}></i>
                 </div>
-                <span className={`text-sm font-semibold text-blue-700`}>
-                  {stat.change}
-                </span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</h3>
-              <p className="text-gray-600 text-sm">{stat.title}</p>
+              <h3 className="mb-1 text-2xl font-bold text-[#2a241e]">{stat.value}</h3>
+              <p className="text-sm text-[#2a241e]/55">{stat.title}</p>
             </div>
           ))}
         </div>
 
         {/* Revenue Chart & Quick Actions */}
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Revenue Trend</h2>
+        <div className="mb-8 grid gap-4 lg:grid-cols-3">
+          <div className="admin-panel rounded-2xl p-5 lg:col-span-2">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-[#2a241e]">Revenue</h2>
               <select
-                className="bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                className="rounded-lg border border-[#c4a15a]/20 bg-white/80 p-2 text-sm text-[#2a241e]/80"
                 value={dateRange}
                 onChange={(e) => setDateRange(e.target.value)}
               >
@@ -280,94 +278,81 @@ export default function AdminDashboard() {
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.1} />
-                      <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#c4a15a" stopOpacity={0.35} />
+                      <stop offset="95%" stopColor="#c4a15a" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} dy={10} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} tickFormatter={(value) => `GH₵${value}`} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(92,78,58,0.15)" />
+                  <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#57534e' }} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#57534e' }} tickFormatter={(value) => `GH₵${value}`} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                    contentStyle={{ backgroundColor: '#f7f3eb', borderRadius: '12px', border: '1px solid #e4d8c4', color: '#2a241e' }}
                     formatter={(value) => [`GH₵${(value as number)?.toFixed(2) ?? '0.00'}`, 'Revenue']}
                   />
-                  <Area type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
+                  <Area type="monotone" dataKey="revenue" stroke="#c4a15a" strokeWidth={2} fillOpacity={1} fill="url(#colorRevenue)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-            <div className="space-y-3">
-              <Link href="/admin/products/new" className="flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded-lg transition-colors group">
-                <div className="flex items-center font-medium">
-                  <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3 group-hover:bg-blue-100 transition-colors shadow-sm">
-                    <i className="ri-add-line"></i>
+          <div className="admin-panel rounded-2xl p-5">
+            <h2 className="mb-4 text-lg font-semibold text-[#2a241e]">On the desk</h2>
+            <div className="space-y-2">
+              {[
+                { href: '/admin/products/new', icon: 'ri-add-line', label: 'Add a piece' },
+                { href: '/admin/pos', icon: 'ri-computer-line', label: 'Open the counter' },
+                { href: '/admin/orders', icon: 'ri-file-list-line', label: 'Review orders' },
+                { href: '/admin/coupons', icon: 'ri-coupon-2-line', label: 'Coupons' },
+              ].map((action) => (
+                <Link key={action.href} href={action.href} className="flex items-center justify-between rounded-xl border border-[#c4a15a]/20 px-3 py-3 text-sm text-[#2a241e]/80 hover:border-[#c4a15a]/40 hover:text-[#8d6230]">
+                  <span className="flex items-center gap-3">
+                    <i className={action.icon}></i>
+                    {action.label}
                   </span>
-                  Add Product
-                </div>
-                <i className="ri-arrow-right-line"></i>
-              </Link>
-              <Link href="/admin/pos" className="flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded-lg transition-colors group">
-                <div className="flex items-center font-medium">
-                  <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3 group-hover:bg-blue-100 transition-colors shadow-sm">
-                    <i className="ri-computer-line"></i>
-                  </span>
-                  Open POS
-                </div>
-                <i className="ri-arrow-right-line"></i>
-              </Link>
-              <Link href="/admin/orders" className="flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded-lg transition-colors group">
-                <div className="flex items-center font-medium">
-                  <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3 group-hover:bg-blue-100 transition-colors shadow-sm">
-                    <i className="ri-file-list-line"></i>
-                  </span>
-                  Manage Orders
-                </div>
-                <i className="ri-arrow-right-line"></i>
-              </Link>
+                  <i className="ri-arrow-right-line"></i>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 overflow-hidden">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Recent Orders</h2>
-              <Link href="/admin/orders" className="text-blue-700 hover:text-blue-800 font-medium text-sm whitespace-nowrap cursor-pointer">
-                View All <i className="ri-arrow-right-line ml-1"></i>
+        <div className="mb-8 grid gap-4 lg:grid-cols-3">
+          <div className="admin-panel overflow-hidden rounded-2xl p-4 sm:p-5 lg:col-span-2">
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-[#2a241e]">Recent orders</h2>
+              <Link href="/admin/orders" className="text-sm text-[#c4a15a] hover:text-[#8d6230]">
+                View all <i className="ri-arrow-right-line ml-1"></i>
               </Link>
             </div>
 
             <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
               {recentOrders.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">No recent orders.</p>
+                <p className="py-4 text-center text-[#2a241e]/50">No recent orders.</p>
               ) : (
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="border-b border-[#c4a15a]/20">
                     <tr>
-                      <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Order ID</th>
-                      <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Customer</th>
-                      <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Date</th>
-                      <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Total</th>
-                      <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Status</th>
+                      <th className="px-3 py-3 text-left text-[11px] uppercase tracking-[0.16em] text-[#2a241e]/45">Order</th>
+                      <th className="px-3 py-3 text-left text-[11px] uppercase tracking-[0.16em] text-[#2a241e]/45">Customer</th>
+                      <th className="px-3 py-3 text-left text-[11px] uppercase tracking-[0.16em] text-[#2a241e]/45">Date</th>
+                      <th className="px-3 py-3 text-left text-[11px] uppercase tracking-[0.16em] text-[#2a241e]/45">Total</th>
+                      <th className="px-3 py-3 text-left text-[11px] uppercase tracking-[0.16em] text-[#2a241e]/45">Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     {recentOrders.map((order) => (
-                      <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                        <td className="py-4 px-4">
-                          <Link href={`/admin/orders/${order.id}`} className="text-blue-700 hover:text-blue-800 font-medium whitespace-nowrap cursor-pointer">
+                      <tr key={order.id} className="border-b border-[#c4a15a]/15">
+                        <td className="px-3 py-4">
+                          <Link href={`/admin/orders/${order.id}`} className="font-medium text-[#c4a15a]">
                             {order.displayId}
                           </Link>
                         </td>
-                        <td className="py-4 px-4">
-                          <p className="font-medium text-gray-900 whitespace-nowrap">{order.customer}</p>
-                          <p className="text-sm text-gray-500">{order.email}</p>
+                        <td className="px-3 py-4">
+                          <p className="whitespace-nowrap font-medium text-[#2a241e]">{order.customer}</p>
+                          <p className="text-sm text-[#2a241e]/45">{order.email}</p>
                         </td>
-                        <td className="py-4 px-4 text-gray-700 whitespace-nowrap">{order.date}</td>
-                        <td className="py-4 px-4 font-semibold text-gray-900 whitespace-nowrap">GH₵ {order.total.toFixed(2)}</td>
+                        <td className="whitespace-nowrap px-3 py-4 text-[#2a241e]/70">{order.date}</td>
+                        <td className="whitespace-nowrap px-3 py-4 font-semibold text-[#2a241e]">GH₵ {order.total.toFixed(2)}</td>
                         <td className="py-4 px-4">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${statusColors[order.status] || 'bg-gray-100'}`}>
                             {order.status === 'shipped' ? 'Packaged' : order.status.charAt(0).toUpperCase() + order.status.slice(1)}
@@ -382,17 +367,17 @@ export default function AdminDashboard() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Low Stock Alert</h2>
+            <div className="admin-panel rounded-2xl p-5">
+              <h2 className="mb-4 text-lg font-semibold text-[#2a241e]">Low stock</h2>
               {lowStockProducts.length === 0 ? (
-                <p className="text-gray-500">Inventory looks good!</p>
+                <p className="text-[#2a241e]/50">The rails are stocked.</p>
               ) : (
                 <div className="space-y-3">
                   {lowStockProducts.map((product, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={index} className="flex items-center justify-between rounded-xl border border-[#c4a15a]/20 p-3">
                       <div className="flex-1">
-                        <p className="font-medium text-gray-900 text-sm truncate pr-2">{product.name}</p>
-                        <p className="text-xs text-gray-600 mt-1">Stock: {product.stock} units</p>
+                        <p className="truncate pr-2 text-sm font-medium text-[#2a241e]">{product.name}</p>
+                        <p className="mt-1 text-xs text-[#2a241e]/45">Stock: {product.stock}</p>
                       </div>
                       <span className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${product.status === 'critical' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'
                         }`}>
@@ -402,32 +387,32 @@ export default function AdminDashboard() {
                   ))}
                 </div>
               )}
-              <Link href="/admin/products?filter=low-stock" className="block text-center mt-4 text-blue-700 hover:text-blue-800 font-medium text-sm whitespace-nowrap cursor-pointer">
-                View All Products <i className="ri-arrow-right-line ml-1"></i>
+              <Link href="/admin/products?filter=low-stock" className="mt-4 block text-center text-sm text-[#c4a15a] hover:text-[#8d6230]">
+                View all pieces <i className="ri-arrow-right-line ml-1"></i>
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 overflow-hidden">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-gray-900">Products</h2>
-            <Link href="/admin/products" className="text-blue-700 hover:text-blue-800 font-medium text-sm whitespace-nowrap cursor-pointer">
-              View All <i className="ri-arrow-right-line ml-1"></i>
+        <div className="admin-panel overflow-hidden rounded-2xl p-4 sm:p-5">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-[#2a241e]">Pieces on the floor</h2>
+            <Link href="/admin/products" className="text-sm text-[#c4a15a] hover:text-[#8d6230]">
+              View all <i className="ri-arrow-right-line ml-1"></i>
             </Link>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {topProducts.map((product) => (
-              <div key={product.id} className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
-                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-3">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+              <div key={product.id} className="rounded-xl border border-[#c4a15a]/20 p-3">
+                <div className="mb-3 aspect-square overflow-hidden rounded-lg bg-[#f3eee6]">
+                  <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
-                <div className="mt-3 pt-3 border-t border-gray-200 flex items-center justify-between">
-                  <span className="text-sm text-gray-600">Stock: {product.stock}</span>
-                  <Link href={`/admin/products/${product.id}`} className="text-blue-700 hover:text-blue-800 text-sm font-medium whitespace-nowrap cursor-pointer">
-                    Edit <i className="ri-arrow-right-line ml-1"></i>
+                <h3 className="mb-2 line-clamp-2 font-medium text-[#2a241e]">{product.name}</h3>
+                <div className="mt-3 flex items-center justify-between border-t border-[#c4a15a]/20 pt-3">
+                  <span className="text-sm text-[#2a241e]/50">Stock: {product.stock}</span>
+                  <Link href={`/admin/products/${product.id}`} className="text-sm text-[#c4a15a]">
+                    Edit
                   </Link>
                 </div>
               </div>

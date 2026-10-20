@@ -4,13 +4,20 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CheckoutSteps from '@/components/CheckoutSteps';
+import GuestCheckout from '@/components/GuestCheckout';
 import OrderSummary from '@/components/OrderSummary';
 import { useCart } from '@/context/CartContext';
+import { isMockCatalogMode } from '@/lib/mock-catalog';
 import { supabase } from '@/lib/supabase';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useRecaptcha } from '@/hooks/useRecaptcha';
 
 export default function CheckoutPage() {
+  if (isMockCatalogMode()) return <GuestCheckout />;
+  return <LiveCheckoutPage />;
+}
+
+function LiveCheckoutPage() {
   usePageTitle('Checkout');
   const router = useRouter();
   const { cart, subtotal: cartSubtotal, clearCart } = useCart();

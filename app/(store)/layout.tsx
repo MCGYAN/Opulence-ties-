@@ -19,6 +19,7 @@ const OfflineIndicator = dynamic(() => import('@/components/OfflineIndicator'), 
 const NetworkStatusMonitor = dynamic(() => import('@/components/NetworkStatusMonitor'), { ssr: false });
 const UpdatePrompt = dynamic(() => import('@/components/UpdatePrompt'), { ssr: false });
 const LiveSalesNotification = dynamic(() => import('@/components/LiveSalesNotification'), { ssr: false });
+const ShopAssistant = dynamic(() => import('@/components/ShopAssistant'), { ssr: false });
 
 export default function StoreLayout({
   children,
@@ -48,6 +49,7 @@ export default function StoreLayout({
         <NetworkStatusMonitor />
         <UpdatePrompt />
         <LiveSalesNotification />
+        <ShopAssistant />
       </div>
       <MobileBottomNav />
     </CMSProvider>

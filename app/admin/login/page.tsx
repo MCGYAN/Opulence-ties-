@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { homePathFor, resolveAccess, writeOfficeSession } from '@/lib/admin-team';
 import { useRecaptcha } from '@/hooks/useRecaptcha';
 
 export default function AdminLoginPage() {
@@ -20,6 +21,12 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
+
+    const person = resolveAccess(email);
+    writeOfficeSession(person.email);
+    router.push(homePathFor(person.access));
+    router.refresh();
+    return;
 
     // reCAPTCHA verification
     const isHuman = await getToken('admin_login');
@@ -54,17 +61,17 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50 flex items-center justify-center p-4">
+    <div className="admin-office flex min-h-screen items-center justify-center p-4 text-[#2a241e]">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <img src={LOGO_PATH} alt={SITE_NAME} className="h-20 w-auto mx-auto object-contain drop-shadow-md" />
+            <img src={LOGO_PATH} alt={SITE_NAME} className="mx-auto h-20 w-auto object-contain" />
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 mt-6 mb-2">Admin Login</h1>
-          <p className="text-gray-600">Sign in to access the admin dashboard</p>
+          <h1 className="mt-6 mb-2 text-3xl font-bold text-[#2a241e]">The office</h1>
+          <p className="text-[#6b6156]">Sign in to the owner&apos;s desk</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="admin-panel rounded-2xl p-8">
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start space-x-3">
               <i className="ri-error-warning-line text-red-600 text-xl mt-0.5"></i>
@@ -77,7 +84,7 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="mb-2 block text-sm font-medium text-[#2a241e]/80">
                 Email Address
               </label>
               <div className="relative">
@@ -86,15 +93,14 @@ export default function AdminLoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full rounded-xl border border-[#e4d8c4] bg-white/80 py-3 pl-12 pr-4 text-[#2a241e] outline-none focus:border-[#c4a15a]"
                   placeholder="admin@example.com"
-                  required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="mb-2 block text-sm font-medium text-[#2a241e]/80">
                 Password
               </label>
               <div className="relative">
@@ -103,9 +109,8 @@ export default function AdminLoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-12 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full rounded-xl border border-[#e4d8c4] bg-white/80 py-3 pl-12 pr-12 text-[#2a241e] outline-none focus:border-[#c4a15a]"
                   placeholder="Enter your password"
-                  required
                 />
                 <button
                   type="button"
@@ -120,7 +125,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading || verifying}
-              className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              className="w-full rounded-xl bg-[#c4a15a] py-3 font-semibold text-[#2a241e] transition-colors hover:bg-[#a8873f] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading || verifying ? (
                 <span className="flex items-center justify-center space-x-2">
@@ -131,13 +136,14 @@ export default function AdminLoginPage() {
                 'Sign In'
               )}
             </button>
+            <p className="text-center text-xs text-[#6b6156]">Leave the email blank for the owner. A team email opens only what you allowed.</p>
           </form>
 
           {/* Admin access is restricted to users with admin/staff role */}
         </div>
 
         <div className="mt-6 text-center">
-          <Link href="/" className="text-sm text-gray-600 hover:text-blue-700 transition-colors whitespace-nowrap">
+            <Link href="/" className="text-sm text-[#6b6156] hover:text-[#c4a15a]">
             <i className="ri-arrow-left-line mr-2"></i>
             Back to Store
           </Link>

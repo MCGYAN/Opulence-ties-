@@ -1,13 +1,13 @@
 {
-  "name": "Bibi Beauty Store",
-  "short_name": "Bibi Beauty",
-  "description": "Glow Like You Mean It.",
+  "name": "Opulence Ties",
+  "short_name": "Opulence Ties",
+  "description": "The Culture Of Royalty",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#FFF7FB",
-  "theme_color": "#E2187A",
+  "background_color": "#000000",
+  "theme_color": "#DAA520",
   "dir": "ltr",
   "lang": "en",
   "categories": ["shopping"],
@@ -27,7 +27,7 @@
   ],
   "shortcuts": [
     {
-      "name": "Shop Beauty",
+      "name": "Shop",
       "short_name": "Shop",
       "url": "/shop?source=pwa-shortcut",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]

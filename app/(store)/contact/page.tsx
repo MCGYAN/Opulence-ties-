@@ -7,6 +7,10 @@ import {
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_SECONDARY_DISPLAY,
   BUSINESS_ADDRESS,
+  BUSINESS_CITY,
+  USA_ADDRESS,
+  USA_PHONE,
+  CONTACT_EMAIL_SECONDARY,
   WHATSAPP_URL,
 } from '@/lib/site-brand';
 import { useState, useEffect } from 'react';
@@ -103,8 +107,8 @@ export default function ContactPage() {
   const contactAddress = getSetting('contact_address') || BUSINESS_ADDRESS;
 
   const heroTitle = pageContent?.title || `Contact ${SITE_NAME}`;
-  const heroSubtitle = pageContent?.subtitle || 'Order makeup & skincare — we reply fast on WhatsApp.';
-  const heroContent = pageContent?.content || 'Call, WhatsApp or send a message. We are here to help you find your glow.';
+  const heroSubtitle = pageContent?.subtitle || 'WhatsApp, call, or email the Ghana and USA studios.';
+  const heroContent = pageContent?.content || 'We make neckties and accessories. Tell us what you need.';
 
   const waLink = WHATSAPP_URL;
   const telLink = `tel:${CONTACT_PHONE}`;
@@ -115,14 +119,16 @@ export default function ContactPage() {
       title: 'Call Us',
       value: contactPhone,
       link: telLink,
-      description: `Also: ${CONTACT_PHONE_SECONDARY_DISPLAY}`,
+      description: CONTACT_PHONE_SECONDARY_DISPLAY
+        ? `Also: ${CONTACT_PHONE_SECONDARY_DISPLAY}`
+        : 'We reply during business hours',
     },
     {
       icon: 'ri-mail-line',
       title: 'Email Us',
       value: contactEmail,
       link: `mailto:${contactEmail}`,
-      description: 'We respond within 24 hours'
+      description: CONTACT_EMAIL_SECONDARY,
     },
     {
       icon: 'ri-whatsapp-line',
@@ -136,14 +142,14 @@ export default function ContactPage() {
       title: 'Visit Us',
       value: contactAddress,
       link: 'https://maps.google.com',
-      description: 'Darkuman, Fadama Junction',
+      description: `Ghana studio · USA ${USA_PHONE}`,
     }
   ];
 
   const faqs = [
     {
       question: 'How do I place an order?',
-      answer: `Call ${CONTACT_PHONE_DISPLAY}, WhatsApp us, or add items to your cart and checkout. Not sure what suits your skin or look? Message us first — we will guide you.`,
+      answer: `Call ${CONTACT_PHONE_DISPLAY}, WhatsApp us, or add items to your cart and checkout. Message us if you need help choosing.`,
     },
     {
       question: 'Do you deliver nationwide?',
@@ -151,11 +157,11 @@ export default function ContactPage() {
     },
     {
       question: 'Can I pay on delivery?',
-      answer: 'Yes — pay on delivery is available so you can shop with confidence and glow without the stress.',
+      answer: 'Yes — pay on delivery is available on eligible orders.',
     },
     {
       question: 'Where are you located?',
-      answer: 'We are at Darkuman, Fadama Junction, Accra. Visit us or order for delivery.',
+      answer: `Ghana: ${BUSINESS_ADDRESS}. USA: ${USA_ADDRESS}.`,
     },
   ];
 
@@ -164,7 +170,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title={`Contact ${SITE_NAME}`}
-        subtitle="Order makeup & skincare — we reply fast on WhatsApp."
+        subtitle="WhatsApp, call, or email the Ghana and USA studios."
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

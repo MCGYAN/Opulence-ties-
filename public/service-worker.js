@@ -1,6 +1,6 @@
 // Service Worker — update CACHE_VERSION when deploying
-const CACHE_VERSION = 'app-v5-bibi-beauty';
-const LOGO_PATH = '/logo.png?v=5';
+const CACHE_VERSION = 'app-v3-opulence-ties';
+const LOGO_PATH = '/logo.png?v=3';
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
 const IMAGE_CACHE = `images-${CACHE_VERSION}`;

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Clarity Labs — Proposal for Opulence Ties</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #f7f0e6;
+      color: #3c2a28;
+      font-family: "Segoe UI", Calibri, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+      page-break-after: always;
+      position: relative;
+      background: #f7f0e6;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    .sheet { display: flex; height: 297mm; }
+    .main {
+      width: 142mm;
+      padding: 15mm 11mm 13mm 15mm;
+      display: flex;
+      flex-direction: column;
+    }
+    .rail {
+      width: 68mm;
+      background: #8f3542;
+      color: #fff6ec;
+      padding: 15mm 8mm 12mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kicker {
+      font-size: 9pt;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8f3542;
+      font-weight: 650;
+    }
+    h1 {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-weight: 400;
+      font-size: 36pt;
+      line-height: 0.94;
+      letter-spacing: -0.025em;
+      color: #6e2832;
+      margin-top: 6mm;
+    }
+    h1 em { font-style: italic; color: #a56b2d; }
+    .story { margin-top: 7mm; max-width: 112mm; }
+    .story p {
+      font-size: 11.5pt;
+      line-height: 1.42;
+      color: #4a3834;
+      margin-bottom: 3.4mm;
+    }
+    .story p strong { color: #6e2832; font-weight: 650; }
+
+    .obstacles { margin-top: 2mm; }
+    .obstacles li {
+      list-style: none;
+      position: relative;
+      padding-left: 4mm;
+      font-size: 11pt;
+      line-height: 1.35;
+      color: #3c2a28;
+      margin-bottom: 1.6mm;
+    }
+    .obstacles li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1.7mm;
+      width: 1.7mm;
+      height: 1.7mm;
+      background: #c4a15a;
+    }
+
+    .guarantee {
+      margin-top: auto;
+      background: #8f3542;
+      color: #fff6ec;
+      padding: 5mm 5.5mm 5.2mm;
+    }
+    .guarantee .label {
+      font-size: 8.5pt;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #f0d7a4;
+      font-weight: 650;
+      margin-bottom: 2mm;
+    }
+    .guarantee p {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 12.5pt;
+      line-height: 1.32;
+    }
+
+    .brand {
+      font-size: 10pt;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #f0d7a4;
+      font-weight: 650;
+    }
+    .brand span {
+      display: block;
+      color: #fff6ec;
+      letter-spacing: 0.32em;
+      margin-top: 1.4mm;
+    }
+    .rail h2 {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-weight: 400;
+      font-size: 18pt;
+      line-height: 1.05;
+      color: #fff6ec;
+      margin-top: 7mm;
+    }
+    .drivers { margin-top: 7mm; }
+    .driver {
+      border-top: 1px solid rgba(240, 215, 164, 0.45);
+      padding: 3.2mm 0 2.8mm;
+    }
+    .driver:last-child { border-bottom: 1px solid rgba(240, 215, 164, 0.45); }
+    .driver b {
+      display: block;
+      font-size: 8pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f0d7a4;
+      font-weight: 650;
+      margin-bottom: 0.8mm;
+    }
+    .driver span {
+      display: block;
+      font-size: 10pt;
+      line-height: 1.3;
+      color: #fff6ec;
+    }
+    .page-no {
+      margin-top: auto;
+      padding-top: 6mm;
+      font-size: 9pt;
+      letter-spacing: 0.18em;
+      color: #f0d7a4;
+    }
+
+    .p2 {
+      padding: 13mm 14mm 11mm;
+      display: flex;
+      flex-direction: column;
+      height: 297mm;
+    }
+    .p2-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1.5px solid #e4d3b8;
+      padding-bottom: 3.5mm;
+    }
+    .p2-head .brandline,
+    .p2-head .for {
+      font-size: 9pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 650;
+    }
+    .p2-head .brandline { color: #8f3542; }
+    .p2-head .for { color: #7a645c; letter-spacing: 0.08em; font-weight: 500; }
+    .p2 h2 {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-weight: 400;
+      font-size: 26pt;
+      line-height: 1;
+      color: #6e2832;
+      margin: 6mm 0 2mm;
+    }
+    .lede {
+      font-size: 11pt;
+      line-height: 1.38;
+      color: #4a3834;
+      max-width: 175mm;
+      margin-bottom: 4mm;
+    }
+
+    .offer {
+      display: grid;
+      grid-template-columns: 42mm 1fr;
+      gap: 0 6mm;
+      padding: 4.2mm 0;
+      border-top: 1px solid #e4d3b8;
+    }
+    .offer .amt {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 18pt;
+      line-height: 1;
+      color: #6e2832;
+    }
+    .offer .pay {
+      margin-top: 1.5mm;
+      font-size: 8pt;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #a56b2d;
+      font-weight: 700;
+    }
+    .offer h3 {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 14pt;
+      font-weight: 400;
+      color: #6e2832;
+    }
+    .offer .why, .hero-offer .why {
+      margin: 1mm 0 1.8mm;
+      font-size: 10.5pt;
+      line-height: 1.32;
+    }
+    .offer .why { color: #4a3834; }
+    .offer ul, .hero-offer ul { list-style: none; }
+    .offer li, .hero-offer li {
+      position: relative;
+      padding-left: 3.4mm;
+      font-size: 10.5pt;
+      line-height: 1.32;
+      margin-bottom: 0.7mm;
+    }
+    .offer li::before, .hero-offer li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1.6mm;
+      width: 1.5mm;
+      height: 1.5mm;
+      background: #c4a15a;
+    }
+
+    .hero-offer {
+      margin-top: 2mm;
+      background: #8f3542;
+      color: #fff6ec;
+      padding: 5.5mm 6.5mm 5.8mm;
+      display: grid;
+      grid-template-columns: 46mm 1fr;
+      gap: 0 6mm;
+    }
+    .hero-offer .flag {
+      font-size: 8pt;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f0d7a4;
+      font-weight: 700;
+      margin-bottom: 1.6mm;
+    }
+    .hero-offer .amt {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 24pt;
+      line-height: 0.95;
+      color: #fff6ec;
+    }
+    .hero-offer .pay {
+      margin-top: 2mm;
+      font-size: 8pt;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #f0d7a4;
+      font-weight: 700;
+    }
+    .hero-offer h3 {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 16pt;
+      font-weight: 400;
+      color: #fff6ec;
+    }
+    .hero-offer .why { color: #fff0e4; }
+    .hero-offer li { color: #fff6ec; }
+
+    .close {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8mm;
+      border-top: 1.5px solid #c4a15a;
+      padding-top: 4mm;
+    }
+    .close p {
+      font-family: "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 13pt;
+      line-height: 1.3;
+      color: #6e2832;
+      max-width: 128mm;
+    }
+    .close .meta {
+      text-align: right;
+      font-size: 8pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7a645c;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <div class="sheet">
+      <div class="main">
+        <div class="kicker">Prepared for Opulence Ties</div>
+        <h1>The shop sells<br />while the phone<br /><em>is face down.</em></h1>
+        <div class="story">
+          <p>Right now it does not. A buyer asks the price, whether the piece is in stock, how to pay, or where the order is. You are with a customer, in traffic, or asleep. They buy from whoever answers while you are still typing.</p>
+          <p>Those four questions are a second job. The business stays the size of the messages you can touch yourself. A new website that still waits on you is the same problem in a nicer frame.</p>
+          <p><strong>You are not buying a website.</strong> You are buying the result: a guest pays without writing you, and the four answers go out before you pick up the phone.</p>
+        </div>
+        <ul class="obstacles">
+          <li>They will not hunt through the shop. If paying takes a message, they leave.</li>
+          <li>WhatsApp is where the day disappears. Instagram is the door you would still have to watch.</li>
+          <li>An empty shop, untrained staff, and an agency that leaves on launch day puts every one of those jobs back on you.</li>
+        </ul>
+        <div class="guarantee">
+          <div class="label">If we miss it, we stay</div>
+          <p>If any piece named in your package is not delivered, we finish it at no added fee. The job is not closed, and we do not leave, until that work is in your hands.</p>
+        </div>
+      </div>
+      <aside class="rail">
+        <div>
+          <div class="brand">Clarity<span>Labs</span></div>
+          <h2>The Phone-Down Launch</h2>
+        </div>
+        <div class="drivers">
+          <div class="driver">
+            <b>The result</b>
+            <span>A guest sees the piece and pays without writing you.</span>
+          </div>
+          <div class="driver">
+            <b>Why it happens</b>
+            <span>Price, stock, a pay link, and order status are answered on the channels you choose.</span>
+          </div>
+          <div class="driver">
+            <b>How fast</b>
+            <span>The answer is there before you open the phone. Work starts the day payment lands.</span>
+          </div>
+          <div class="driver">
+            <b>What you do</b>
+            <span>You step in only when someone asks for a person.</span>
+          </div>
+        </div>
+        <div class="page-no">01</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="p2">
+      <div class="p2-head">
+        <div class="brandline">Clarity Labs · The Phone-Down Launch</div>
+        <div class="for">Opulence Ties · 20 October 2026</div>
+      </div>
+      <h2>Same result. Fewer jobs left on you.</h2>
+      <p class="lede">Each step up removes the next reason this fails: the other inbox, the empty shop, the people who do not know the office, and the weeks after real customers start writing.</p>
+
+      <article class="offer">
+        <div>
+          <div class="amt">GH₵4,500</div>
+          <div class="pay">Paid in full</div>
+        </div>
+        <div>
+          <h3>6-Day Counter</h3>
+          <p class="why">Kills the “how do I order?” message and the WhatsApp queue. Instagram, the catalogue, and training stay with you.</p>
+          <ul>
+            <li>Guest can see a piece and pay. Ghana buyers are not sent through an export form.</li>
+            <li>The four answers on the website and WhatsApp: price, stock, pay link, order status.</li>
+            <li>You take the chat the moment someone asks for a person.</li>
+            <li>We stay six days after it is live.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="offer">
+        <div>
+          <div class="amt">GH₵6,000</div>
+          <div class="pay">GH₵3,000 now<br />GH₵3,000 on delivery</div>
+        </div>
+        <div>
+          <h3>14-Day Desk</h3>
+          <p class="why">Kills the second door. People who never open the site still get the same four answers where they already write.</p>
+          <ul>
+            <li>Everything in the 6-Day Counter.</li>
+            <li>The same answers on Instagram.</li>
+            <li>Website, WhatsApp, and Instagram in one office. You can take any chat.</li>
+            <li>We stay two weeks after it is live.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="hero-offer">
+        <div>
+          <div class="flag">The full launch</div>
+          <div class="amt">GH₵8,000</div>
+          <div class="pay">GH₵4,000 now<br />GH₵4,000 on delivery</div>
+        </div>
+        <div>
+          <h3>6-Week Phone-Down Launch</h3>
+          <p class="why">The shop opens with pieces on it, your people can run it, and we are still there while real orders start. Saying no puts the loading, the training, and those six weeks back on you.</p>
+          <ul>
+            <li>Shop, WhatsApp, and Instagram, answered the same way.</li>
+            <li>First 30 products loaded, so day one is not an empty shop.</li>
+            <li>The people who will run the office, trained.</li>
+            <li>We stay six weeks after it is live.</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="close">
+        <p>Reply with Counter, Desk, or Launch. We start the day payment lands, and we stay until every piece in that package is in your hands.</p>
+        <div class="meta">
+          Clarity Labs<br />
+          Page 02<br />
+          Search is not included
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

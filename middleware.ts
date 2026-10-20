@@ -29,6 +29,11 @@ export async function middleware(request: NextRequest) {
             return response;
         }
 
+        // Demo preview: Sign in sets this cookie when no live admin database is connected.
+        if (!supabaseServiceKey && request.cookies.get('ot-admin-demo')?.value === '1') {
+            return response;
+        }
+
         // Server-side auth check: verify the Supabase session cookie/token
         // We set 'sb-access-token' explicitly on login, but also check other formats
         let token: string | undefined;

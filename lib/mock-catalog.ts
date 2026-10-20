@@ -1,40 +1,15 @@
 /**
- * Frontend-only mock catalog for Bibi Beauty Store.
- * Replace with live data once NEXT_PUBLIC_SUPABASE_* env vars are set.
+ * Opulence Ties catalog. Live Supabase data replaces this when configured.
  */
 
 import { isSupabaseConfigured } from '@/lib/supabase';
+import { OPULENCE_CATEGORIES, OPULENCE_PRODUCTS, OPULENCE_SHOP_CATEGORIES } from '@/lib/opulence-catalog';
 
 export function isMockCatalogMode(): boolean {
   return !isSupabaseConfigured();
 }
 
-export const MOCK_SHOP_CATEGORIES = [
-  {
-    id: 'makeup',
-    label: 'Makeup',
-    href: '/shop?category=makeup',
-    image: '',
-  },
-  {
-    id: 'skincare',
-    label: 'Skincare',
-    href: '/shop?category=skincare',
-    image: '',
-  },
-  {
-    id: 'beauty-essentials',
-    label: 'Beauty Essentials',
-    href: '/shop?category=beauty-essentials',
-    image: '',
-  },
-  {
-    id: 'new-arrivals',
-    label: 'New Arrivals',
-    href: '/shop?category=new-arrivals',
-    image: '',
-  },
-] as const;
+export const MOCK_SHOP_CATEGORIES = OPULENCE_SHOP_CATEGORIES;
 
 export type MockCategory = {
   id: string;
@@ -46,44 +21,7 @@ export type MockCategory = {
   position: number;
 };
 
-export const MOCK_CATEGORIES: MockCategory[] = [
-  {
-    id: 'cat-makeup',
-    name: 'Makeup',
-    slug: 'makeup',
-    description: 'Lips, face and eyes — looks that feel soft, polished and confident.',
-    image_url: '',
-    parent_id: null,
-    position: 1,
-  },
-  {
-    id: 'cat-skincare',
-    name: 'Skincare',
-    slug: 'skincare',
-    description: 'Clean, calm, glowing skin rituals for everyday care.',
-    image_url: '',
-    parent_id: null,
-    position: 2,
-  },
-  {
-    id: 'cat-essentials',
-    name: 'Beauty Essentials',
-    slug: 'beauty-essentials',
-    description: 'The finishing touches that make your routine feel complete.',
-    image_url: '',
-    parent_id: null,
-    position: 3,
-  },
-  {
-    id: 'cat-new',
-    name: 'New Arrivals',
-    slug: 'new-arrivals',
-    description: 'Fresh drops — be first to glow with the newest finds.',
-    image_url: '',
-    parent_id: null,
-    position: 4,
-  },
-];
+export const MOCK_CATEGORIES: MockCategory[] = OPULENCE_CATEGORIES;
 
 export type MockProduct = {
   id: string;
@@ -103,139 +41,7 @@ export type MockProduct = {
   featured?: boolean;
 };
 
-const MOCK_PRODUCTS: MockProduct[] = [
-  {
-    id: 'mock-matte-lip',
-    slug: 'soft-matte-lip-kit',
-    name: 'Soft Matte Lip Kit',
-    description:
-      'A cushiony matte that stays put without drying you out — so your smile feels as good as it looks.',
-    price: 85,
-    compare_at_price: 110,
-    category: 'Makeup',
-    categorySlug: 'makeup',
-    image: '',
-    tagline: 'All-day soft colour',
-    rating_avg: 4.9,
-    quantity: 30,
-    moq: 1,
-    featured: true,
-  },
-  {
-    id: 'mock-glow-foundation',
-    slug: 'natural-glow-foundation',
-    name: 'Natural Glow Foundation',
-    description:
-      'Light-to-medium coverage that melts into skin — for that “I woke up like this” finish that still photographs beautifully.',
-    price: 160,
-    category: 'Makeup',
-    categorySlug: 'makeup',
-    image: '',
-    tagline: 'Skin-like finish',
-    rating_avg: 4.8,
-    quantity: 22,
-    moq: 1,
-    featured: true,
-  },
-  {
-    id: 'mock-hydrating-serum',
-    slug: 'dewdrop-hydrating-serum',
-    name: 'Dewdrop Hydrating Serum',
-    description:
-      'A lightweight sip of moisture that leaves skin plump, calm and quietly radiant — confidence you can feel.',
-    price: 120,
-    compare_at_price: 145,
-    category: 'Skincare',
-    categorySlug: 'skincare',
-    image: '',
-    tagline: 'Plump, calm, glow',
-    rating_avg: 4.9,
-    quantity: 40,
-    moq: 1,
-    featured: true,
-  },
-  {
-    id: 'mock-gentle-cleanser',
-    slug: 'silk-touch-cleanser',
-    name: 'Silk Touch Cleanser',
-    description:
-      'Removes the day without stripping your barrier — so your skin feels soft, not tight.',
-    price: 75,
-    category: 'Skincare',
-    categorySlug: 'skincare',
-    image: '',
-    tagline: 'Gentle daily reset',
-    rating_avg: 4.7,
-    quantity: 35,
-    moq: 1,
-    featured: true,
-  },
-  {
-    id: 'mock-setting-spray',
-    slug: 'all-day-setting-mist',
-    name: 'All-Day Setting Mist',
-    description:
-      'Lock in your look from morning market runs to evening plans — soft-focus finish, zero cake.',
-    price: 65,
-    category: 'Beauty Essentials',
-    categorySlug: 'beauty-essentials',
-    image: '',
-    tagline: 'Makeup that lasts',
-    rating_avg: 4.6,
-    quantity: 50,
-    moq: 1,
-    featured: true,
-  },
-  {
-    id: 'mock-beauty-sponge',
-    slug: 'blend-perfect-sponge',
-    name: 'Blend Perfect Sponge',
-    description:
-      'Bounce on foundation for a seamless, second-skin blend — the little tool that upgrades every look.',
-    price: 35,
-    category: 'Beauty Essentials',
-    categorySlug: 'beauty-essentials',
-    image: '',
-    tagline: 'Flawless blend',
-    rating_avg: 4.5,
-    quantity: 60,
-    moq: 1,
-    featured: false,
-  },
-  {
-    id: 'mock-blush-duo',
-    slug: 'cheek-flush-duo',
-    name: 'Cheek Flush Duo',
-    description:
-      'A soft flush that makes you look rested and lit-from-within — the kind of colour people notice without knowing why.',
-    price: 95,
-    category: 'Makeup',
-    categorySlug: 'makeup',
-    image: '',
-    tagline: 'Lit-from-within colour',
-    rating_avg: 4.8,
-    quantity: 28,
-    moq: 1,
-    featured: false,
-  },
-  {
-    id: 'mock-new-glow-set',
-    slug: 'weekend-glow-set-new',
-    name: 'Weekend Glow Set (New)',
-    description:
-      'Just dropped — a ready-to-glow mini ritual for soft skin and easy glam. Limited stock.',
-    price: 210,
-    compare_at_price: 250,
-    category: 'New Arrivals',
-    categorySlug: 'new-arrivals',
-    image: '',
-    tagline: 'Fresh drop, full glow',
-    rating_avg: 5.0,
-    quantity: 12,
-    moq: 1,
-    featured: true,
-  },
-];
+const MOCK_PRODUCTS: MockProduct[] = OPULENCE_PRODUCTS;
 
 export const MOCK_FEATURED_PRODUCTS = MOCK_PRODUCTS.filter((p) => p.featured).map((p) => ({
   id: p.id,
@@ -379,9 +185,9 @@ export function mockProductToDetail(product: MockProduct) {
     colorHexMap: {} as Record<string, string>,
     variants: [] as unknown[],
     sizes: [] as string[],
-    features: ['Authentic beauty products', 'Nationwide delivery', 'Pay on delivery available'],
-    featured: ['Authentic beauty products', 'Nationwide delivery', 'Pay on delivery available'],
-    care: 'Store in a cool, dry place. Patch-test new skincare. Follow product directions for best results.',
+    features: ['Crafted necktie', 'Ghana and USA delivery', 'Custom orders available'],
+    featured: ['Crafted necktie', 'Ghana and USA delivery', 'Custom orders available'],
+    care: 'Hang or roll the tie after wear. Spot clean. Avoid steam directly on woven symbols.',
     preorderShipping: null,
   };
 }

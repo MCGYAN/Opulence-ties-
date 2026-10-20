@@ -11,9 +11,10 @@ import { useCMS } from '@/context/CMSContext';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
   { label: 'Shop', href: '/shop' },
-  { label: 'Categories', href: '/categories' },
-  { label: 'About', href: '/about' },
+  { label: 'Custom', href: '/custom' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -23,8 +24,6 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [wishlistCount, setWishlistCount] = useState(0);
   const [user, setUser] = useState<any>(null);
-  const [scrolled, setScrolled] = useState(false);
-
   const { cartCount, isCartOpen, setIsCartOpen } = useCart();
   const { getSetting } = useCMS();
 
@@ -32,13 +31,6 @@ export default function Header() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -88,25 +80,23 @@ export default function Header() {
   };
 
   const iconBtn =
-    'h-10 w-10 rounded-full flex items-center justify-center text-brand-plum transition-all duration-300 max-lg:bg-white/70 max-lg:border max-lg:border-brand-rose/15 lg:glass-pill lg:border-white/40 hover:text-brand-rose';
+    'h-10 w-10 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:text-brand-rose';
 
   const headerContent = (
     <>
       <header
         data-store-header
-        className={`store-header-fixed mobile-header-glass safe-area-top transition-all duration-300 lg:duration-500 lg:ease-boutique ${
-          scrolled ? 'lg:glass-frosted lg:border-white/40 lg:shadow-boutique' : 'lg:glass-cream lg:border-brand-rose/20'
-        }`}
+        className="store-header-fixed mobile-header-glass safe-area-top bg-black border-b border-gray-700"
       >
         <nav aria-label="Main navigation" className="relative">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Mobile: logo left | search + cart right */}
-            <div className="lg:hidden flex items-center justify-between h-[4.5rem] gap-3">
+            <div className="lg:hidden flex items-center justify-between h-16 gap-3">
               <Link href="/" className="flex shrink-0 select-none" aria-label="Go to homepage">
                 <img
                   src={LOGO_PATH}
                   alt={siteName}
-                  className="h-16 w-auto max-w-[min(62vw,260px)] object-contain object-left"
+                  className="h-10 w-auto max-w-[min(58vw,220px)] object-contain object-left"
                 />
               </Link>
               <div className="flex items-center justify-end gap-1 shrink-0">
@@ -117,7 +107,7 @@ export default function Header() {
                   <button className={iconBtn} onClick={() => setIsCartOpen(!isCartOpen)} aria-label="Cart">
                     <i className="ri-shopping-bag-3-line text-xl" />
                     {cartCount > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-rose text-[10px] font-bold text-white">
+                      <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                         {cartCount}
                       </span>
                     )}
@@ -128,30 +118,24 @@ export default function Header() {
             </div>
 
             {/* Desktop */}
-            <div
-              className={`hidden lg:grid lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-4 lg:transition-all lg:duration-500 ${
-                scrolled ? 'lg:h-[4.75rem]' : 'lg:h-24'
-              }`}
-            >
+            <div className="hidden lg:grid lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-4 lg:h-16">
               <div className="flex items-center gap-3">
                 <Link href="/" className="flex items-center select-none" aria-label="Go to homepage">
                   <img
                     src={LOGO_PATH}
                     alt={siteName}
-                    className={`w-auto object-contain transition-all duration-500 ${
-                      scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[4.5rem] max-w-[300px]'
-                    }`}
+                    className="h-11 w-auto max-w-[240px] object-contain"
                   />
                 </Link>
               </div>
 
               <div className="hidden lg:flex items-center justify-center">
-                <div className="flex items-center glass-pill px-2 py-1.5 shadow-sm">
+                <div className="flex items-center">
                   {NAV_LINKS.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="group relative px-4 py-2 text-[11px] uppercase tracking-[0.22em] font-semibold text-brand-plum/85 transition-colors hover:text-brand-rose"
+                      className="group relative px-3 py-2 text-sm text-white transition-colors hover:text-brand-rose"
                     >
                       {link.label}
                       <span className="absolute left-3 right-3 -bottom-0.5 h-px scale-x-0 bg-brand-rose transition-transform duration-300 ease-boutique group-hover:scale-x-100" />
@@ -168,7 +152,7 @@ export default function Header() {
                 <Link href="/wishlist" className={`${iconBtn} relative hidden sm:flex`} aria-label="Wishlist">
                   <i className="ri-heart-3-line text-xl" />
                   {wishlistCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-rose text-[10px] font-bold text-white">
+                    <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                       {wishlistCount}
                     </span>
                   )}
@@ -188,7 +172,7 @@ export default function Header() {
                   <button className={iconBtn} onClick={() => setIsCartOpen(!isCartOpen)} aria-label="Cart">
                     <i className="ri-shopping-bag-3-line text-xl" />
                     {cartCount > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-rose text-[10px] font-bold text-white">
+                      <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                         {cartCount}
                       </span>
                     )}
@@ -228,7 +212,7 @@ export default function Header() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Try dresses, tops, sets..."
+                  placeholder="Search ties, bow ties, scarves..."
                   className="boutique-input pr-14 text-base"
                   autoFocus
                 />

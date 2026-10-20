@@ -230,7 +230,7 @@ function ShopContent() {
       <PageHero
         eyebrow={`${SITE_NAME} Collection`}
         title="The Edit"
-        subtitle="Makeup, skincare and essentials — your softest glow starts here."
+        subtitle="Neckties, bow ties, cuffs and scarves from the Opulence collections."
       />
 
       <div className="lg:hidden glass-cream border-b border-brand-rose/15 py-3 px-4 sticky top-16 z-30">

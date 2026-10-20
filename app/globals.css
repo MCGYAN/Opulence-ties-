@@ -4,21 +4,21 @@
 @tailwind utilities;
 
 :root {
-  /* Bibi Beauty — soft blush pink, rose accents */
-  --brand-plum: #5c3a4a;
-  --brand-burgundy: #9a1458;
-  --brand-rose-gold: #e2187a;
-  --brand-sage: #f5a3c7;
-  --brand-cream: #fff7fb;
-  --brand-mocha: #7a6570;
-  --brand-latte: #fff0f6;
-  --brand-ivory: #fffbfe;
-  --brand-gold: var(--brand-rose-gold);
-  --brand-nude: #fad9e8;
-  --brand-warm-dark: #9a1458;
-  --brand-royal-gold: var(--brand-rose-gold);
-  --brand-deep-black: #5c3a4a;
-  --brand-champagne: #fce4ef;
+  /* Opulence Ties — black, gold, red */
+  --brand-plum: #111111;
+  --brand-burgundy: #dc2626;
+  --brand-rose-gold: #daa520;
+  --brand-sage: #c9a227;
+  --brand-cream: #ffffff;
+  --brand-mocha: #6b7280;
+  --brand-latte: #f5f5f5;
+  --brand-ivory: #ffffff;
+  --brand-gold: #daa520;
+  --brand-nude: #f3f4f6;
+  --brand-warm-dark: #b8860b;
+  --brand-royal-gold: #daa520;
+  --brand-deep-black: #000000;
+  --brand-champagne: #f7f7f7;
 }
 
 /* ========================================
@@ -751,7 +751,7 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #FFF0F6 0%, #E2187A 55%, #F06BA6 100%);
+  background: #000000;
   animation: splashFadeOut 0.5s ease-out 1.5s forwards;
 }
 
@@ -853,7 +853,7 @@ body {
   z-index: 1;
 }
 
-/* Fixed store chrome — portaled to body, never scrolls away */
+/* Fixed black bar — stays on screen and never turns transparent */
 header[data-store-header],
 .store-header-fixed {
   position: fixed !important;
@@ -862,6 +862,8 @@ header[data-store-header],
   right: 0;
   z-index: 95;
   max-width: 100vw;
+  background: #000000 !important;
+  border-bottom: 1px solid #374151;
 }
 
 nav[aria-label='Mobile navigation'],
@@ -881,14 +883,14 @@ nav[aria-label='Mobile navigation'],
 
 @media (min-width: 1024px) {
   .store-page-shell {
-    padding-top: 5rem;
+    padding-top: calc(4rem + env(safe-area-inset-top, 0px));
   }
 
   header[data-store-header].mobile-header-glass {
-    background: transparent;
+    background: #000000 !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-bottom: none;
+    border-bottom: 1px solid #374151;
     box-shadow: none;
   }
 }
@@ -920,7 +922,28 @@ nav[aria-label='Mobile navigation'],
   }
 
   .boutique-btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-rose text-white rounded-full font-semibold text-sm tracking-wide shadow-boutique transition-all duration-300 ease-boutique hover:bg-[#c4126a] hover:shadow-boutique-lg hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-red-600 text-white rounded-md font-semibold text-sm tracking-wide shadow-boutique transition-all duration-300 ease-boutique hover:bg-red-700 hover:shadow-boutique-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .royalty-marquee {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #000;
+    color: #daa520;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+  }
+
+  .royalty-marquee-track {
+    display: flex;
+    min-width: max-content;
+    animation: royalty-marquee 28s linear infinite;
+  }
+
+  @keyframes royalty-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
   .boutique-btn-secondary {
@@ -1128,13 +1151,9 @@ nav[aria-label='Mobile navigation'],
 @media (max-width: 1023px) {
   header[data-store-header],
   .mobile-header-glass {
-    background: rgba(250, 246, 239, 0.52);
-    backdrop-filter: blur(24px) saturate(1.4);
-    -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow:
-      0 4px 24px rgba(227, 24, 125, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    background: #000000;
+    border-bottom: 1px solid #374151;
+    box-shadow: none;
   }
 
   .mobile-bottom-nav-glass {
@@ -1148,5 +1167,144 @@ nav[aria-label='Mobile navigation'],
 
   #shop-by-category {
     scroll-margin-top: 5rem;
+  }
+}
+
+.home-glass {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 24px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+}
+
+.home-glass-dark {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(218, 165, 32, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 16px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+}
+
+.home-paper {
+  background:
+    radial-gradient(720px 320px at var(--mx, 70%) var(--my, 0%), rgba(218, 165, 32, 0.16), transparent 62%),
+    #f6f3ee;
+}
+
+.home-stage {
+  background:
+    radial-gradient(680px 360px at var(--mx, 20%) var(--my, 30%), rgba(218, 165, 32, 0.18), transparent 58%),
+    #090909;
+}
+
+.home-marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.royalty-marquee:hover .royalty-marquee-track {
+  animation-play-state: paused;
+}
+
+.home-progress {
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, #daa520, #fff4cc);
+  animation: home-progress 5s linear;
+}
+
+@keyframes home-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.admin-office {
+  background: #efe8dc;
+  color: #2a241e;
+}
+
+.admin-rail {
+  background: #3f342c;
+  color: #efe8dc;
+}
+
+.admin-glass {
+  background: rgba(247, 243, 235, 0.9);
+  border-color: #e4d8c4;
+  backdrop-filter: blur(16px) saturate(1.05);
+  -webkit-backdrop-filter: blur(16px) saturate(1.05);
+}
+
+.admin-panel {
+  background: #f7f3eb;
+  border: 1px solid #e4d8c4;
+  border-top: 2px solid #c4a15a;
+  box-shadow: 0 12px 28px rgba(63, 52, 44, 0.05);
+}
+
+.admin-office .bg-blue-50 { background-color: rgba(196, 161, 90, 0.12) !important; }
+.admin-office .bg-blue-100 { background-color: rgba(196, 161, 90, 0.2) !important; }
+.admin-office .bg-blue-600,
+.admin-office .bg-blue-700 { background-color: #c4a15a !important; color: #2a241e !important; }
+.admin-office .hover\:bg-blue-600:hover,
+.admin-office .hover\:bg-blue-700:hover,
+.admin-office .hover\:bg-blue-800:hover,
+.admin-office .bg-blue-800 { background-color: #a8873f !important; color: #2a241e !important; }
+.admin-office .text-blue-600,
+.admin-office .text-blue-700,
+.admin-office .text-blue-800,
+.admin-office .hover\:text-blue-700:hover,
+.admin-office .hover\:text-blue-800:hover,
+.admin-office .hover\:text-blue-900:hover { color: #8d6230 !important; }
+.admin-office .border-blue-200,
+.admin-office .border-blue-500,
+.admin-office .focus\:border-blue-500:focus { border-color: #c4a15a !important; }
+.admin-office .focus\:ring-blue-500:focus { --tw-ring-color: #c4a15a !important; }
+
+.home-rail {
+  scrollbar-width: none;
+}
+
+.home-rail::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-progress,
+  .royalty-marquee-track,
+  .shop-assist-ping,
+  .shop-assist-core {
+    animation: none;
+  }
+}
+
+.shop-assist-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid #daa520;
+  animation: shop-assist-ping 1.5s ease-out infinite;
+  pointer-events: none;
+}
+
+.shop-assist-ping-late {
+  animation-delay: 0.75s;
+}
+
+.shop-assist-core {
+  animation: shop-assist-beep 1.5s ease-in-out infinite;
+}
+
+@keyframes shop-assist-ping {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+@keyframes shop-assist-beep {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px rgba(218, 165, 32, 0.95);
   }
 }

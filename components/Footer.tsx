@@ -2,9 +2,12 @@
 
 import {
   SITE_NAME,
-  SITE_TAGLINE,
   CONTACT_EMAIL,
   BUSINESS_ADDRESS,
+  USA_ADDRESS,
+  USA_PHONE,
+  CONTACT_EMAIL_SECONDARY,
+  CONTACT_PHONE_SECONDARY_DISPLAY,
   SOCIAL_INSTAGRAM,
   SOCIAL_FACEBOOK,
   LOGO_PATH,
@@ -15,9 +18,16 @@ import {
 } from '@/lib/site-brand';
 import Link from 'next/link';
 import { useCMS } from '@/context/CMSContext';
+import { useEffect, useState } from 'react';
+import { DEFAULT_SITE_COPY, loadSiteCopy } from '@/lib/site-copy';
 
 export default function Footer() {
   const { getSetting } = useCMS();
+  const [copy, setCopy] = useState(DEFAULT_SITE_COPY);
+
+  useEffect(() => {
+    setCopy(loadSiteCopy());
+  }, []);
 
   const siteName = getSetting('site_name') || SITE_NAME;
   const contactEmail = getSetting('contact_email') || CONTACT_EMAIL;
@@ -26,11 +36,8 @@ export default function Footer() {
   const socialFacebook = getSetting('social_facebook') || SOCIAL_FACEBOOK;
 
   const shopLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Shop All', href: '/shop' },
-    { label: 'Categories', href: '/categories' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Top Collection', href: '/categories' },
+    { label: 'Featured Collection', href: '/shop' },
   ];
 
   const socialLinks = [
@@ -40,69 +47,20 @@ export default function Footer() {
   ].filter((s) => Boolean(s.href));
 
   return (
-    <footer className="relative mt-8 md:mt-12 bg-white text-brand-plum border-t border-brand-rose/10 rounded-t-[1.75rem] md:rounded-t-[2.5rem]">
+    <footer className="relative mt-8 md:mt-12 bg-black text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         {/* Mobile layout */}
-        <div className="md:hidden pt-10 pb-6 space-y-8">
-          <div className="flex flex-col items-center text-center">
-            <Link href="/" className="inline-block mb-5">
+        <div className="md:hidden pt-6 pb-2">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="inline-block min-w-0">
               <img
                 src={LOGO_PATH}
                 alt={siteName}
-                className="h-36 w-auto max-w-[300px] object-contain object-center"
+                className="h-9 w-auto max-w-[150px] object-contain object-left"
               />
             </Link>
-            <p className="font-serif text-lg text-brand-rose">{SITE_TAGLINE}</p>
-          </div>
-
-          <div className="rounded-2xl border border-brand-rose/20 bg-brand-latte/60 px-5 py-5 space-y-3">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-rose">Get In Touch</p>
-            <p className="text-sm text-brand-plum/70 leading-relaxed">{contactAddress}</p>
-            <a
-              href={`tel:${CONTACT_PHONE}`}
-              className="inline-flex items-center gap-2 text-sm text-brand-plum hover:text-brand-rose transition-colors"
-            >
-              <i className="ri-phone-line text-brand-rose" aria-hidden />
-              {CONTACT_PHONE_DISPLAY}
-            </a>
-          </div>
-
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-rose mb-4">Shop</p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-              {shopLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-brand-plum/80 py-1 hover:text-brand-rose transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-rose mb-4">Categories</p>
-            <div className="flex flex-wrap gap-2">
-              {SHOP_CATEGORIES.map((cat) => (
-                <Link
-                  key={cat.href}
-                  href={cat.href}
-                  className="text-xs px-3 py-1.5 rounded-full border border-brand-rose/25 text-brand-plum/80 hover:bg-brand-latte hover:text-brand-rose transition-colors"
-                >
-                  {cat.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {socialLinks.length > 0 && (
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-rose mb-4 text-center">
-                Follow Us
-              </p>
-              <div className="flex justify-center gap-4">
+            {socialLinks.length > 0 && (
+              <div className="flex shrink-0 gap-2">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -110,17 +68,58 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="flex flex-col items-center gap-1.5 min-w-[4.5rem]"
+                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[#DAA520]/40 text-sm text-[#DAA520]"
                   >
-                    <span className="w-12 h-12 rounded-full border border-brand-rose/40 flex items-center justify-center text-lg text-brand-rose hover:bg-brand-rose hover:text-white transition-all">
-                      <i className={social.icon} />
-                    </span>
-                    <span className="text-[10px] text-brand-plum/45">{social.label}</span>
+                    <i className={social.icon} />
                   </a>
                 ))}
               </div>
+            )}
+          </div>
+          <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-[#DAA520]">{copy.footerTagline}</p>
+
+          <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5">
+            <div>
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#DAA520]">Shop</p>
+              <ul className="space-y-1.5 text-[13px] text-white/75">
+                {shopLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="hover:text-[#DAA520]">{link.label}</Link>
+                  </li>
+                ))}
+                <li><Link href="/privacy" className="hover:text-[#DAA520]">Privacy</Link></li>
+                <li><Link href="/terms" className="hover:text-[#DAA520]">Terms</Link></li>
+              </ul>
             </div>
-          )}
+            <div>
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#DAA520]">Visit</p>
+              <ul className="space-y-1.5 text-[13px] leading-snug text-white/75">
+                <li>{contactAddress}</li>
+                <li>
+                  <a href={`tel:${CONTACT_PHONE}`} className="hover:text-[#DAA520]">{CONTACT_PHONE_DISPLAY}</a>
+                </li>
+                <li className="pt-1">{USA_ADDRESS}</li>
+                <li>
+                  <a href={`tel:${USA_PHONE.replace(/[^\d+]/g, '')}`} className="hover:text-[#DAA520]">{USA_PHONE}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#DAA520]">Collections</p>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+              {SHOP_CATEGORIES.map((cat) => (
+                <Link
+                  key={cat.href}
+                  href={cat.href}
+                  className="truncate text-[13px] text-white/75 hover:text-[#DAA520]"
+                >
+                  {cat.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Desktop layout */}
@@ -130,24 +129,25 @@ export default function Footer() {
               <img
                 src={LOGO_PATH}
                 alt={siteName}
-                className="h-40 w-auto max-w-[340px] object-contain object-left"
+                className="h-16 w-auto max-w-[260px] object-contain object-left"
               />
             </Link>
-            <p className="font-serif text-xl text-brand-rose">{SITE_TAGLINE}</p>
-            <div className="text-sm text-brand-plum/70 space-y-1">
-              <p className="font-medium text-brand-plum">{siteName}</p>
+            <p className="text-brand-rose">{copy.footerTagline}</p>
+            <div className="text-sm text-white/75 space-y-1">
+              <p className="font-medium text-white">Ghana</p>
               <p>{contactAddress}</p>
-              <p>
-                <a href={`mailto:${contactEmail}`} className="hover:text-brand-rose transition-colors">
-                  {contactEmail}
-                </a>
-              </p>
+              <p>{CONTACT_PHONE_DISPLAY} / {CONTACT_PHONE_SECONDARY_DISPLAY}</p>
+              <p className="font-medium text-white pt-3">USA</p>
+              <p>{USA_ADDRESS}</p>
+              <p>{USA_PHONE}</p>
+              <p>{contactEmail}</p>
+              <p>{CONTACT_EMAIL_SECONDARY}</p>
             </div>
           </div>
 
           <div>
-            <h4 className="font-serif text-lg mb-5 text-brand-rose">Quick Links</h4>
-            <ul className="space-y-2.5 text-sm text-brand-plum/75">
+            <h4 className="text-lg font-semibold mb-5">Outfits</h4>
+            <ul className="space-y-2.5 text-sm text-white/80">
               {shopLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-brand-rose transition-colors">
@@ -159,7 +159,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-serif text-lg mb-5 text-brand-rose">Follow Us</h4>
+            <h4 className="text-lg font-semibold mb-5">Legal</h4>
+            <ul className="space-y-2.5 text-sm text-white/80 mb-6">
+              <li><Link href="/privacy" className="hover:text-brand-rose">Privacy</Link></li>
+              <li><Link href="/terms" className="hover:text-brand-rose">Terms</Link></li>
+            </ul>
+            <h4 className="text-lg font-semibold mb-5">Follow Us</h4>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -177,8 +182,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-brand-rose/10 py-6 md:mt-4 md:pt-8 text-center text-xs text-brand-plum/45">
-          <p>&copy; {new Date().getFullYear()} {siteName}. All rights reserved.</p>
+        <div className="border-t border-white/10 py-4 md:mt-4 md:py-6 md:pt-8 text-center text-xs text-white/50">
+          <p>&copy; {new Date().getFullYear()} {copy.copyrightName}</p>
         </div>
       </div>
     </footer>

@@ -5,5 +5,5 @@ Disallow: /account/
 Disallow: /checkout/
 Disallow: /api/
 
-Sitemap: https://bibibeautystore.com/sitemap.xml
+Sitemap: https://www.opulenceties.com/sitemap.xml
 
